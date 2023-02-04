@@ -1,9 +1,0 @@
-content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"/>
-content_assist_number_of_computers=16
-eclipse.preferences.version=1
-org.eclipse.jdt.ui.formatterprofiles.version=22
-org.eclipse.jdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates><template autoinsert\="true" context\="java" deleted\="false" description\="scanner\uC0DD\uC131 \uAD6C\uBB38 \uC790\uB3D9 \uC644\uC131" enabled\="true" name\="scanner">${\:import(java.util.Scanner)}Scanner sc \= new Scanner(System.in);${cursor}</template><template autoinsert\="true" context\="java" deleted\="false" description\="scanner\u3134\u314A" enabled\="true" name\="\u3134\u314A">${\:import(java.util.Scanner)}Scanner sc \= new Scanner(System.in);${cursor}</template><template autoinsert\="true" context\="java" deleted\="false" description\="public\u3154\u3155\u3160" enabled\="true" name\="\u3154\u3155\u3160">public ${void} ${name}(${}) {&\#13;\r\n\t${cursor}&\#13;\r\n}</template><template autoinsert\="true" context\="java" deleted\="false" description\="println" enabled\="true" name\="\uB1E8\uB0B4">System.out.println(${word_selection}${});${cursor}</template></templates>
-spelling_locale_initialized=true
-typefilter_migrated_2=true
-useAnnotationsPrefPage=true
-useQuickDiffPrefPage=true
