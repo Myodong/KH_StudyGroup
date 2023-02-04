@@ -39,9 +39,14 @@ public class B2587 {
 		// 선언
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
+		System.out.println("인덱스 설정 : ");
+		int nNum[] = new int[Integer.parseInt(bf.readLine())];
+		
 		
 		// 0. 숫자가 아니라면 
-		
+		if (Character.Digit(asd)==false) {
+			
+		}
 		// 1. 인덱스 설정 : 
 		
 		// 2. 배열에 값 널기 
