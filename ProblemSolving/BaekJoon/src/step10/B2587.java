@@ -38,6 +38,7 @@ public class B2587 {
 		 * 30
 		 */
 		
+		
 		// 선언
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
@@ -74,13 +75,27 @@ public class B2587 {
 		}
 		
 		
+		
+		
+		
+		/* 제출용 코드 
+		 
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
+		int nNum[] = new int[5];
+		
+		int sum=0;
 
+		for (int i = 0; i < nNum.length; i++) {
+			nNum[i] = Integer.parseInt(bf.readLine());
+			sum+= nNum[i];
+		}
+
+		Arrays.sort(nNum);
 		
+		System.out.println(sum/5);
+		System.out.println(nNum[5/2]);
 		
-		
-		
-		
-		
+		*/
 	}
 }
