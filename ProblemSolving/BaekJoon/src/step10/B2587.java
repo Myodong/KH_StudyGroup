@@ -1,11 +1,13 @@
 package step10;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class B2587 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NumberFormatException, IOException {
 		/*
 		 * 어떤 수들이 있을 때, 그 수들을 대표하는 값으로 가장 흔하게 쓰이는 것은 평균이다. 평균은 주어진 모든 수의 합을 수의 개수로 나눈
 		 * 것이다. 예를 들어 10, 40, 30, 60, 30의 평균은 (10 + 40 + 30 + 60 + 30) / 5 = 170 / 5 =
@@ -39,17 +41,21 @@ public class B2587 {
 		// 선언
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
-		System.out.println("인덱스 설정 : ");
-		int nNum[] = new int[Integer.parseInt(bf.readLine())];
+		// 인덱스 값 입력
+		System.out.print("인덱스 설정 : ");
+		int index = Integer.parseInt(bf.readLine());
+		int nNum[] = new int[index];
+		int sum=0;
+
 		
-		
-		// 0. 숫자가 아니라면 
-		if (Character.Digit(asd)==false) {
-			
+		// 배열에 값 넣기
+		for (int i = 0; i < nNum.length; i++) {
+			nNum[i] = Integer.parseInt(bf.readLine());
+			System.out.println(Arrays.toString(nNum));
 		}
-		// 1. 인덱스 설정 : 
 		
-		// 2. 배열에 값 널기 
+		
+		
 		
 		// 3. 배열에서 평균값 구하기 
 		
