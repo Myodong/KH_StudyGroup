@@ -22,13 +22,16 @@ public class B25305 {
 		 * 첫째 줄에는 응시자의 수 N과 상을 받는 사람의 수 k가 공백을 사이에 두고 주어진다. 
 		 * 둘째 줄에는 각 학생의 점수 x가 공백을 사이에 두고 주어진다.
 		 * 
-		 * ex) 5 2 100 76 85 93 98
+		 * ex) 
+		 * 5 2 
+		 * 100 76 85 93 98
 		 * 
 		 * 
 		 * 출력 
 		 * 상을 받는 커트라인을 출력하라.
 
-		 * ex) 98
+		 * ex) 
+		 * 98
 		 * 
 		 * 
 		 * 제한 
@@ -38,16 +41,78 @@ public class B25305 {
 		 */
 
 		
+		// 선언
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		
+		int inputLength=1;
 		
-		
-		
-		
-		
-		
-		
-		
-		
+		do {
+			
+			System.out.println("N전체인원, K상받을인원");
+			String input[] = bf.readLine().split(" ");
+			
+			if (input.length ==2) {
+
+				int memberAll = Integer.parseInt(input[0]);
+				int memberAward = Integer.parseInt(input[1]);
+				
+				inputLength=0;
+
+				// 제한 조건
+				if (1 <= memberAll && memberAll <= 1000 && 1<=memberAward && memberAward <= memberAll) {
+					
+					// 전체인원 수 만큼 인덱스 길이 설정
+					String scoreIdx[] = new String[memberAll] ;
+					
+					int check=1;
+					
+					do {
+						
+						System.out.println("X점수를 입력하세요");
+						scoreIdx = bf.readLine().split(" ");
+						
+						// string 를 int 변환
+						int[] score = Stream.of(scoreIdx).mapToInt(Integer::parseInt).toArray();
+						
+						// 전체인원수 와 점수 수량이 맞는지 확인
+						if (scoreIdx.length == memberAll) {
+							
+							// 값 하나하나 조건 확인
+							for (int i = 0; i < score.length; i++) {
+								
+								if (0<=score[i] && score[i]<=10000) {
+									
+									check=0;
+									
+								} else {
+									System.out.println("[!] 점수값이 잘못되었습니다.");
+									check=1;
+									break;
+								}
+							}
+							
+						}else {
+							System.out.println("[!] 인원수에 맞게 점수를 입력해주세요");
+							check=1;
+						}
+						
+						// 내림차순
+						Arrays.sort(score);
+						
+						// 출력
+						System.out.println(score[memberAll-memberAward]);
+						
+					} while (check==1);
+					
+				} else {
+					System.out.println("[!] 입력범위가 잘못됬습니다.");
+				}
+				
+			}else {
+				inputLength=1;
+			}
+			
+		} while (inputLength == 1);
 		
 		
 		
