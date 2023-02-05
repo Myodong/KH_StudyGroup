@@ -31,7 +31,7 @@ public class test {
 				// 배열 오름차순 정렬
 				Arrays.sort(nNum);
 				
-				System.out.println(""); // 띄어쓰기
+				System.out.println(); // 띄어쓰기
 				System.out.println("합계 : "+sum);
 				System.out.println("평균값 : "+sum/index);
 				
