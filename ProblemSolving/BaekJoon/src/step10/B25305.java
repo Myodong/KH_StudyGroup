@@ -49,7 +49,7 @@ public class B25305 {
 		
 		do {
 			
-			System.out.println("N전체인원, K상받을인원");
+			System.out.println("N응시자 수, K상받을 사람 수");
 			String input[] = bf.readLine().split(" ");
 			
 			if (input.length ==2) {
@@ -124,7 +124,7 @@ public class B25305 {
 					} while (check==1);
 					
 				} else {
-					System.out.println("[!] 입력범위가 잘못됬습니다.");
+					System.out.println("[!] 숫자만 입력해주세요.");
 				}
 				
 			}else {
