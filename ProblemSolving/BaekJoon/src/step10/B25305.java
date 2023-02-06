@@ -54,6 +54,7 @@ public class B25305 {
 			
 			if (input.length ==2) {
 
+				// 정규표현식 숫자만 
 				String num = "^[0-9]*$";
 				
 				String data1 =  input[0];
@@ -64,6 +65,7 @@ public class B25305 {
 				int memberAll=0;
 				int memberAward=0;
 				
+				// 정규표현식 검사 
 				if (result1== true && result2==true) {
 					 memberAll = Integer.parseInt(input[0]);
 					 memberAward = Integer.parseInt(input[1]);
