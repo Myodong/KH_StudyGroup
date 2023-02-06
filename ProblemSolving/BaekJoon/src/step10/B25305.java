@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class B25305 {
@@ -53,10 +54,26 @@ public class B25305 {
 			
 			if (input.length ==2) {
 
-				int memberAll = Integer.parseInt(input[0]);
-				int memberAward = Integer.parseInt(input[1]);
+				String num = "^[0-9]*$";
 				
-				inputLength=0;
+				String data1 =  input[0];
+				String data2 =  input[1];
+				boolean result1 = Pattern.matches(num,data1);
+				boolean result2 = Pattern.matches(num,data2);
+				
+				int memberAll=0;
+				int memberAward=0;
+				
+				if (result1== true && result2==true) {
+					 memberAll = Integer.parseInt(input[0]);
+					 memberAward = Integer.parseInt(input[1]);
+					inputLength=0;
+
+					
+				}else {
+					inputLength=1;
+				}
+				
 
 				// 제한 조건
 				if (1 <= memberAll && memberAll <= 1000 && 1<=memberAward && memberAward <= memberAll) {
@@ -110,6 +127,8 @@ public class B25305 {
 				
 			}else {
 				inputLength=1;
+				System.out.println("[!] 값을 2개 작성해 주세요");
+
 			}
 			
 		} while (inputLength == 1);
