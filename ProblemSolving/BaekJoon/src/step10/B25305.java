@@ -46,6 +46,8 @@ public class B25305 {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		
 		int inputLength=1;
+		// 정규표현식 숫자만 
+		String num = "^[0-9]*$";
 		
 		do {
 			
@@ -54,9 +56,7 @@ public class B25305 {
 			
 			if (input.length ==2) {
 
-				// 정규표현식 숫자만 
-				String num = "^[0-9]*$";
-				
+				// 정규표현식
 				String data1 =  input[0];
 				String data2 =  input[1];
 				boolean result1 = Pattern.matches(num,data1);
@@ -99,6 +99,7 @@ public class B25305 {
 							// 값 하나하나 조건 확인
 							for (int i = 0; i < score.length; i++) {
 								
+
 								if (0<=score[i] && score[i]<=10000) {
 									
 									check=0;
