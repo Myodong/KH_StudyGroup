@@ -12,22 +12,23 @@ public class test {
 
 	public static void main(String[] args) throws IOException {
 
-		int arr[] = { 2, 5, 1, 3, 0, 4 };
+		//배열 선언 및 초기화
+				int arr[] = { 2, 5, 1, 3, 0, 4 };
 
-		int indexMin, temp;
-		for (int i = 0; i < arr.length - 1; i++) { // 1.
-			indexMin = i;
-			for (int j = i + 1; j < arr.length; j++) { // 2.
-				if (arr[j] < arr[indexMin]) { // 3.
-					indexMin = j;
+				for (int index = 1; index < arr.length; index++) { // 1.
+					// 임시 인덱스 값 저장
+					int temp = arr[index];
+					// 이전 인덱스 저장
+					int prev = index - 1;
+					while ((prev >= 0) && (arr[prev] > temp)) {      // 2.
+						// 앞인덱스로 위치 변경
+						arr[prev + 1] = arr[prev];
+						prev--;
+					}
+					// 기존 앞인덱스 뒤로 밀기
+					arr[prev + 1] = temp;                            // 3.
 				}
-			}
-			// 4. swap(arr[indexMin], arr[i])
-			temp = arr[indexMin];
-			arr[indexMin] = arr[i];
-			arr[i] = temp;
-		}
-		System.out.println(Arrays.toString(arr));
+				System.out.println(Arrays.toString(arr));
 
 /////////////////////////////////////////////////////////////////////////////////////		
 	}
