@@ -12,24 +12,23 @@ public class test {
 
 	public static void main(String[] args) throws IOException {
 
-		
-		int arr[] = {2,5,1,3,0,4};
-		 int temp = 0;
-		 
-			for(int i = 0; i < arr.length; i++) {       // 1.
-				for(int j= 1 ; j < arr.length-i; j++) { // 2.
-					if(arr[j-1] > arr[j]) {             // 3.
-		                // swap(arr[j-1], arr[j])
-						temp = arr[j-1];
-						arr[j-1] = arr[j];
-						arr[j] = temp;
-					}
+		int arr[] = { 2, 5, 1, 3, 0, 4 };
+
+		int indexMin, temp;
+		for (int i = 0; i < arr.length - 1; i++) { // 1.
+			indexMin = i;
+			for (int j = i + 1; j < arr.length; j++) { // 2.
+				if (arr[j] < arr[indexMin]) { // 3.
+					indexMin = j;
 				}
 			}
-			System.out.println(Arrays.toString(arr));
-		
-		
-		
+			// 4. swap(arr[indexMin], arr[i])
+			temp = arr[indexMin];
+			arr[indexMin] = arr[i];
+			arr[i] = temp;
+		}
+		System.out.println(Arrays.toString(arr));
+
 /////////////////////////////////////////////////////////////////////////////////////		
 	}
 }
