@@ -3,33 +3,32 @@ package test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class test {
 
 	public static void main(String[] args) throws IOException {
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
-		// 1. 첫번째 입력값(앞으로 나올 수의 길이)를 정수형으로 바꾸는 작업
-		int number = Integer.parseInt(br.readLine());
-
-		System.out.println("----입력값-----");
-
-		// 2. int형 배열을 만든 후, 각각의 입력값(String)을 int 배열에 넣어준다.
-		int[] arr = new int[number];
-		for (int i = 0; i < number; i++) {
-			arr[i] = Integer.parseInt(br.readLine());
+		// 입력
+		System.out.print("N개입력 : ");
+		// 입력 받은 정수 값 으로  배열인덱스 설정
+		int nNum[] = new int[Integer.parseInt(bf.readLine())];
+		
+		// for문 으로 인덱스 길이만큼 값 넣기
+		for (int i = 0; i < nNum.length; i++) {
+			nNum[i] = Integer.parseInt(bf.readLine());
 		}
-
-		// 정렬하기
-		merge_sort(arr);
-
-		System.out.println("-----정렬값----");
-		// 출력
-		for (int i = 0; i < number; i++) {
-			System.out.println(arr[i]);
+		// 줄 띄우기
+		System.out.println("");
+		// 배열 오름차순 
+		Arrays.sort(nNum);
+		
+		// for문 으로 출력하기
+		for (int x = 0; x < nNum.length; x++) {
+			System.out.println(nNum[x]);
 		}
-
 	}
 
 	private static int[] sorted; // 합치는 과정에서 정렬하여 원소를 담을 임시배열

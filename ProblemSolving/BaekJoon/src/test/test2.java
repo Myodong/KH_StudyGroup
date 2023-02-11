@@ -36,8 +36,8 @@ public class test2 {
 
 	public static void merge_sort(int[] a) {
 
-		sorted = new int[a.length];
-		merge_sort(a, 0, a.length - 1);
+		sorted = new int[a.length]; // 배열 길이 
+		merge_sort(a, 0, a.length - 1); // 배열, 0인덱스 시작, 마지막인덱스 시작
 		sorted = null;
 	}
 
