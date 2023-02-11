@@ -5,151 +5,123 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class test {
-	
-public static void main(String[] args) throws IOException {
-		
+
+	public static void main(String[] args) throws IOException {
+
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
+
 		// 1. 첫번째 입력값(앞으로 나올 수의 길이)를 정수형으로 바꾸는 작업
 		int number = Integer.parseInt(br.readLine());
-		
+
 		// 2. int형 배열을 만든 후, 각각의 입력값(String)을 int 배열에 넣어준다.
 		int[] arr = new int[number];
-		for(int i = 0; i<number;i++) {
+		for (int i = 0; i < number; i++) {
 			arr[i] = Integer.parseInt(br.readLine());
 		}
-		
-		//정렬하기
-		sort(arr);
-		
-		
-		//출력
-		for(int i = 0; i<number;i++) {
+
+		// 정렬하기
+		merge_sort(arr);
+
+		// 출력
+		for (int i = 0; i < number; i++) {
 			System.out.println(arr[i]);
 		}
-		
-		
+
 	}
-	public static void sort(int[] a) {
-		l_pivot_sort(a, 0, a.length - 1);
+
+private static int[] sorted;		// 합치는 과정에서 정렬하여 원소를 담을 임시배열
+	
+	public static void merge_sort(int[] a) {
+		
+		sorted = new int[a.length];
+		merge_sort(a, 0, a.length - 1);
+		sorted = null;
+	}
+	
+	// Top-Down 방식 구현
+	private static void merge_sort(int[] a, int left, int right) {
+		
+		/*
+		 *  left==right 즉, 부분리스트가 1개의 원소만 갖고있는경우 
+		 *  더이상 쪼갤 수 없으므로 return한다.
+		 */
+		if(left == right) return;
+		
+		int mid = (left + right) / 2;	// 절반 위치 
+		
+		merge_sort(a, left, mid);		// 절반 중 왼쪽 부분리스트(left ~ mid)
+		merge_sort(a, mid + 1, right);	// 절반 중 오른쪽 부분리스트(mid+1 ~ right)
+		
+		merge(a, left, mid, right);		// 병합작업
+		
 	}
 	
 	/**
-	 *  왼쪽 피벗 선택 방식
-	 * @param a		정렬할 배열
-	 * @param lo	현재 부분배열의 왼쪽
-	 * @param hi	현재 부분배열의 오른쪽
-	 */
-	private static void l_pivot_sort(int[] a, int lo, int hi) {
-		
-		/*
-		 *  lo가 hi보다 크거나 같다면 정렬 할 원소가 
-		 *  1개 이하이므로 정렬하지 않고 return한다.
-		 */
-		if(lo >= hi) {
-			return;
-		}
-		
-		/*
-		 * 피벗을 기준으로 요소들이 왼쪽과 오른쪽으로 약하게 정렬 된 상태로
-		 * 만들어 준 뒤, 최종적으로 pivot의 위치를 얻는다.
-		 * 
-		 * 그리고나서 해당 피벗을 기준으로 왼쪽 부분리스트와 오른쪽 부분리스트로 나누어
-		 * 분할 정복을 해준다.
-		 * 
-		 * [과정]
-		 * 
-		 * Partitioning:
-		 *
-		 *   a[left]          left part              right part
-		 * +---------------------------------------------------------+
-		 * |  pivot  |    element <= pivot    |    element > pivot   |
-		 * +---------------------------------------------------------+
-		 *    
-		 *    
-		 *  result After Partitioning:
-		 *  
-		 *         left part          a[lo]          right part
-		 * +---------------------------------------------------------+
-		 * |   element <= pivot    |  pivot  |    element > pivot    |
-		 * +---------------------------------------------------------+
-		 *       
-		 *       
-		 *  result : pivot = lo     
-		 *       
-		 *
-		 *  Recursion:
-		 *  
-		 * l_pivot_sort(a, lo, pivot - 1)     l_pivot_sort(a, pivot + 1, hi)
-		 *  
-		 *         left part                           right part
-		 * +-----------------------+             +-----------------------+
-		 * |   element <= pivot    |    pivot    |    element > pivot    |
-		 * +-----------------------+             +-----------------------+
-		 * lo                pivot - 1        pivot + 1                 hi
-		 * 
-		 */
-		int pivot = partition(a, lo, hi);	
-		
-		l_pivot_sort(a, lo, pivot - 1);
-		l_pivot_sort(a, pivot + 1, hi);
-	}
-	
-	
-	
-	/**
-	 * pivot을 기준으로 파티션을 나누기 위한 약한 정렬 메소드
+	 * 합칠 부분리스트는 a배열의 left ~ right 까지이다. 
 	 * 
-	 * @param a		정렬 할 배열 
-	 * @param left	현재 배열의 가장 왼쪽 부분
-	 * @param right	현재 배열의 가장 오른쪽 부분
-	 * @return		최종적으로 위치한 피벗의 위치(lo)를 반환
+	 * @param a		정렬할 배열
+	 * @param left	배열의 시작점
+	 * @param mid	배열의 중간점
+	 * @param right	배열의 끝 점
 	 */
-	private static int partition(int[] a, int left, int right) {
+	private static void merge(int[] a, int left, int mid, int right) {
+		int l = left;		// 왼쪽 부분리스트 시작점
+		int r = mid + 1;	// 오른쪽 부분리스트의 시작점 
+		int idx = left;		// 채워넣을 배열의 인덱스
 		
-		int lo = left;
-		int hi = right;
-		int pivot = a[left];		// 부분리스트의 왼쪽 요소를 피벗으로 설정
 		
-		// lo가 hi보다 작을 때 까지만 반복한다.
-		while(lo < hi) {
-			
+		while(l <= mid && r <= right) {
 			/*
-			 * hi가 lo보다 크면서, hi의 요소가 pivot보다 작거나 같은 원소를
-			 * 찾을 떄 까지 hi를 감소시킨다.
+			 *  왼쪽 부분리스트 l번째 원소가 오른쪽 부분리스트 r번째 원소보다 작거나 같을 경우
+			 *  왼쪽의 l번째 원소를 새 배열에 넣고 l과 idx를 1 증가시킨다.
 			 */
-			while(a[hi] > pivot && lo < hi) {
-				hi--;
+			if(a[l] <= a[r]) {
+				sorted[idx] = a[l];
+				idx++;
+				l++;
 			}
-			
 			/*
-			 * hi가 lo보다 크면서, lo의 요소가 pivot보다 큰 원소를
-			 * 찾을 떄 까지 lo를 증가시킨다.
+			 *  오른쪽 부분리스트 r번째 원소가 왼쪽 부분리스트 l번째 원소보다 작거나 같을 경우
+			 *  오른쪽의 r번째 원소를 새 배열에 넣고 r과 idx를 1 증가시킨다.
 			 */
-			while(a[lo] <= pivot && lo < hi) {
-				lo++;
+			else {
+				sorted[idx] = a[r];
+				idx++;
+				r++;
 			}
-			
-			// 교환 될 두 요소를 찾았으면 두 요소를 바꾼다.
-			swap(a, lo, hi);
 		}
 		
+		/*
+		 * 왼쪽 부분리스트가 먼저 모두 새 배열에 채워졌을 경우 (l > mid)
+		 * = 오른쪽 부분리스트 원소가 아직 남아있을 경우
+		 * 오른쪽 부분리스트의 나머지 원소들을 새 배열에 채워준다.
+		 */
+		if(l > mid) {
+			while(r <= right) {
+				sorted[idx] = a[r];
+				idx++;
+				r++;
+			}
+		}
 		
 		/*
-		 *  마지막으로 맨 처음 pivot으로 설정했던 위치(a[left])의 원소와 
-		 *  lo가 가리키는 원소를 바꾼다.
+		 * 오른쪽 부분리스트가 먼저 모두 새 배열에 채워졌을 경우 (r > right)
+		 * = 왼쪽 부분리스트 원소가 아직 남아있을 경우
+		 * 왼쪽 부분리스트의 나머지 원소들을 새 배열에 채워준다.
 		 */
-		swap(a, left, lo);
+		else {
+			while(l <= mid) {
+				sorted[idx] = a[l];
+				idx++;
+				l++;
+			}
+		}
 		
-		// 두 요소가 교환되었다면 피벗이었던 요소는 lo에 위치하므로 lo를 반환한다.
-		return lo;
+		/*
+		 * 정렬된 새 배열을 기존의 배열에 복사하여 옮겨준다.
+		 */
+		for(int i = left; i <= right; i++) {
+			a[i] = sorted[i];
+		}
 	}
- 
-	private static void swap(int[] a, int i, int j) {
-		int temp = a[i];
-		a[i] = a[j];
-		a[j] = temp;
-	}
-	
-	
 }
