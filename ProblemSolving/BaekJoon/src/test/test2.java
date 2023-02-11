@@ -13,6 +13,8 @@ public class test2 {
 		// 1. 첫번째 입력값(앞으로 나올 수의 길이)를 정수형으로 바꾸는 작업
 		int number = Integer.parseInt(br.readLine());
 
+		System.out.println("----입력값-----");
+
 		// 2. int형 배열을 만든 후, 각각의 입력값(String)을 int 배열에 넣어준다.
 		int[] arr = new int[number];
 		for (int i = 0; i < number; i++) {
@@ -22,6 +24,7 @@ public class test2 {
 		// 정렬하기
 		merge_sort(arr);
 
+		System.out.println("-----정렬값----");
 		// 출력
 		for (int i = 0; i < number; i++) {
 			System.out.println(arr[i]);
@@ -38,28 +41,21 @@ public class test2 {
 		sorted = null;
 	}
 
-	// Bottom-Up 방식 구현
+	// Top-Down 방식 구현
 	private static void merge_sort(int[] a, int left, int right) {
 
 		/*
-		 * 1 - 2 - 4 - 8 - ... 식으로 1부터 서브리스트를 나누는 기준을 두 배씩 늘린다.
+		 * left==right 즉, 부분리스트가 1개의 원소만 갖고있는경우 더이상 쪼갤 수 없으므로 return한다.
 		 */
-		for (int size = 1; size <= right; size += size) {
+		if (left == right)
+			return;
 
-			/*
-			 * 두 부분리스트을 순서대로 병합해준다. 예로들어 현재 부분리스트의 크기가 1(size=1)일 때 왼쪽 부분리스트(low ~ mid)와 오른쪽
-			 * 부분리스트(mid + 1 ~ high)를 생각하면 왼쪽 부분리스트는 low = mid = 0 이고, 오른쪽 부분리스트는 mid + 1부터
-			 * low + (2 * size) - 1 = 1 이 된다.
-			 * 
-			 * 이 때 high가 배열의 인덱스를 넘어갈 수 있으므로 right와 둘 중 작은 값이 병합되도록 해야한다.
-			 */
-			for (int l = 0; l <= right - size; l += (2 * size)) {
-				int low = l;
-				int mid = l + size - 1;
-				int high = Math.min(l + (2 * size) - 1, right);
-				merge(a, low, mid, high); // 병합작업
-			}
-		}
+		int mid = (left + right) / 2; // 절반 위치
+
+		merge_sort(a, left, mid); // 절반 중 왼쪽 부분리스트(left ~ mid)
+		merge_sort(a, mid + 1, right); // 절반 중 오른쪽 부분리스트(mid+1 ~ right)
+
+		merge(a, left, mid, right); // 병합작업
 
 	}
 
