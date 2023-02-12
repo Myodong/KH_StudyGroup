@@ -43,18 +43,27 @@ public class test2 {
 
 	// Top-Down 방식 구현
 	private static void merge_sort(int[] a, int left, int right) {
-
+		System.out.println("쪼개집니당...");
 		/*
 		 * left==right 즉, 부분리스트가 1개의 원소만 갖고있는경우 더이상 쪼갤 수 없으므로 return한다.
 		 */
-		if (left == right)
+		if (left == right) {
+			System.out.println("리턴");
+			System.out.println();
 			return;
+		}
 
 		int mid = (left + right) / 2; // 절반 위치
+		System.out.println("절반위치" + mid);
 
-		merge_sort(a, left, mid); // 절반 중 왼쪽 부분리스트(left ~ mid)
+		merge_sort(a, left, mid); // 절반 중 왼쪽 부분리스트(left ~ mid)'
+			System.out.println("리턴하고 실행");
+			System.out.println("left는 " + left );
+			System.out.println("mid는 " + mid );
+			System.out.println("right는 " + right );
+			System.out.println();
 		merge_sort(a, mid + 1, right); // 절반 중 오른쪽 부분리스트(mid+1 ~ right)
-
+		
 		merge(a, left, mid, right); // 병합작업
 
 	}
@@ -68,11 +77,21 @@ public class test2 {
 	 * @param right 배열의 끝 점
 	 */
 	private static void merge(int[] a, int left, int mid, int right) {
+		System.out.println("병합...");
 		int l = left; // 왼쪽 부분리스트 시작점
 		int r = mid + 1; // 오른쪽 부분리스트의 시작점
 		int idx = left; // 채워넣을 배열의 인덱스
 
 		while (l <= mid && r <= right) {
+			System.out.println("---");
+			System.out.println("병합mid==" +mid);
+			System.out.println("병합right==" +right);
+			System.out.println("병합l=left==" +left);
+			System.out.println("병합r=mid+1==" +(mid+ 1));
+			System.out.println("병합idx==" +left);
+			System.out.println("---");
+
+			
 			/*
 			 * 왼쪽 부분리스트 l번째 원소가 오른쪽 부분리스트 r번째 원소보다 작거나 같을 경우 왼쪽의 l번째 원소를 새 배열에 넣고 l과 idx를 1
 			 * 증가시킨다.
@@ -123,5 +142,6 @@ public class test2 {
 		for (int i = left; i <= right; i++) {
 			a[i] = sorted[i];
 		}
+		System.out.println("병합끝...");
 	}
 }

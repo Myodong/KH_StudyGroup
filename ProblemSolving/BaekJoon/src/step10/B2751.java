@@ -8,27 +8,77 @@ import java.util.Arrays;
 public class B2751 {
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
-		// 선언
+
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		
-		// 입력
+
 		System.out.print("N개입력 : ");
-		// 입력 받은 정수 값 으로  배열인덱스 설정
+
 		int nNum[] = new int[Integer.parseInt(bf.readLine())];
 		
-		// for문 으로 인덱스 길이만큼 값 넣기
 		for (int i = 0; i < nNum.length; i++) {
 			nNum[i] = Integer.parseInt(bf.readLine());
 		}
-		// 줄 띄우기
-		System.out.println("-----------------");
-		// 배열 오름차순 
+
+		System.out.println("---------------------");
+		
+
 		Arrays.sort(nNum);
 		
-		// for문 으로 출력하기
+
 		for (int x = 0; x < nNum.length; x++) {
 			System.out.println(nNum[x]);
 		}
 	}
+	
+	public static int[] temp; 
+	
+	public static void  mergeSort(int[] arr) {
+		
+		temp = new int[arr.length];
+		mergeSort(arr,0,arr.length-1);
+		temp = null;
+	}
+	
+
+	private static void mergeSort(int[] arr, int left, int right) {
+		
+		if (left==right) {
+			return;
+		}
+		
+		int mid = (left+right)/2; 
+		
+		mergeSort(arr,left,mid); 
+		mergeSort(arr,mid+1,right); 
+		merge(arr, left, mid, right); 
+	}
+
+	private static void merge(int[] arr, int left, int mid, int right) {
+		
+		int mergeright = mid+1; 
+		int mergeLeft = left; 
+		int idx = left; 
+		
+		while (mergeLeft<=mid  && mergeright<=right) {
+			
+			if (arr[mergeLeft]<=arr[right]) {
+				temp[idx] = arr[mergeLeft];
+				mergeLeft++;
+				idx++;
+				
+			} else {
+				temp[idx] = arr[mergeright];
+				mergeright++;
+				idx++;
+			}
+		}
+		
+		if (condition) {
+			
+		}
+		
+	}
+	
 
 }
