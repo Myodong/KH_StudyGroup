@@ -1,35 +1,35 @@
 package test;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.Arrays;
 
-public class test2 {
+public class test3 {
 
-	/*병합 정렬 Top-Down 방식 */
-
+	/*병합 정렬 Bottom-Up 방식 */
 	public static void main(String[] args) throws IOException {
 
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
+
+		// 입력
+		System.out.print("N개입력 : ");
+		// 입력 받은 정수 값 으로  배열인덱스 설정
 		int nNum[] = new int[Integer.parseInt(bf.readLine())];
 		
+		// for문 으로 인덱스 길이만큼 값 넣기
 		for (int i = 0; i < nNum.length; i++) {
 			nNum[i] = Integer.parseInt(bf.readLine());
 		}
-
+		// 줄 띄우기
+		System.out.println("");
+		// 배열 오름차순 
 		Arrays.sort(nNum);
-
-		bw.write("\n");//줄바꿈
+		
+		// for문 으로 출력하기
 		for (int x = 0; x < nNum.length; x++) {
-            bw.write(String.valueOf(nNum[x])+"\n");
+			System.out.println(nNum[x]);
 		}
-		bw.flush();
-		bw.close();
 	}
 
 	private static int[] sorted; // 합치는 과정에서 정렬하여 원소를 담을 임시배열
@@ -41,31 +41,28 @@ public class test2 {
 		sorted = null;
 	}
 
-	// Top-Down 방식 구현
+	// Bottom-Up 방식 구현
 	private static void merge_sort(int[] a, int left, int right) {
-		System.out.println("쪼개집니당...");
+
 		/*
-		 * left==right 즉, 부분리스트가 1개의 원소만 갖고있는경우 더이상 쪼갤 수 없으므로 return한다.
+		 * 1 - 2 - 4 - 8 - ... 식으로 1부터 서브리스트를 나누는 기준을 두 배씩 늘린다.
 		 */
-		if (left == right) {
-			System.out.println("리턴");
-			System.out.println();
-			return;
+		for (int size = 1; size <= right; size += size) {
+
+			/*
+			 * 두 부분리스트을 순서대로 병합해준다. 예로들어 현재 부분리스트의 크기가 1(size=1)일 때 왼쪽 부분리스트(low ~ mid)와 오른쪽
+			 * 부분리스트(mid + 1 ~ high)를 생각하면 왼쪽 부분리스트는 low = mid = 0 이고, 오른쪽 부분리스트는 mid + 1부터
+			 * low + (2 * size) - 1 = 1 이 된다.
+			 * 
+			 * 이 때 high가 배열의 인덱스를 넘어갈 수 있으므로 right와 둘 중 작은 값이 병합되도록 해야한다.
+			 */
+			for (int l = 0; l <= right - size; l += (2 * size)) {
+				int low = l;
+				int mid = l + size - 1;
+				int high = Math.min(l + (2 * size) - 1, right);
+				merge(a, low, mid, high); // 병합작업
+			}
 		}
-
-		int mid = (left + right) / 2; // 절반 위치
-		System.out.println("절반위치" + mid);
-
-		// 재귀
-		merge_sort(a, left, mid); // 절반 중 왼쪽 부분리스트(left ~ mid)'
-			System.out.println("리턴하고 실행");
-			System.out.println("left는 " + left );
-			System.out.println("mid는 " + mid );
-			System.out.println("right는 " + right );
-			System.out.println();
-		merge_sort(a, mid + 1, right); // 절반 중 오른쪽 부분리스트(mid+1 ~ right)
-		
-		merge(a, left, mid, right); // 병합작업
 
 	}
 
@@ -78,54 +75,28 @@ public class test2 {
 	 * @param right 배열의 끝 점
 	 */
 	private static void merge(int[] a, int left, int mid, int right) {
-		System.out.println("병합...");
 		int l = left; // 왼쪽 부분리스트 시작점
 		int r = mid + 1; // 오른쪽 부분리스트의 시작점
 		int idx = left; // 채워넣을 배열의 인덱스
 
 		while (l <= mid && r <= right) {
-			System.out.println("---");
-			System.out.println("병합mid==" +mid);
-			System.out.println("병합right==" +right);
-			System.out.println("병합l=left==" +left);
-			System.out.println("병합r=mid+1==" +(mid+ 1));
-			System.out.println("병합idx==" +left);
-			System.out.println("---");
-
-			
 			/*
 			 * 왼쪽 부분리스트 l번째 원소가 오른쪽 부분리스트 r번째 원소보다 작거나 같을 경우 왼쪽의 l번째 원소를 새 배열에 넣고 l과 idx를 1
 			 * 증가시킨다.
 			 */
 			if (a[l] <= a[r]) {
-				System.out.println("");
-				System.out.println("if");
-				System.out.println("a[l]= "+a[l]);
-				System.out.println("a[r]= "+a[r]);
-				System.out.println("l= "+l);
-				System.out.println("r= "+r);
-				System.out.println("idx= "+idx);
 				sorted[idx] = a[l];
-				System.out.println("sorted[idx]= "+sorted[idx]);
 				idx++;
 				l++;
-				System.out.println("idx++= "+ idx);
-				System.out.println("l++= "+ l);
 			}
 			/*
 			 * 오른쪽 부분리스트 r번째 원소가 왼쪽 부분리스트 l번째 원소보다 작거나 같을 경우 오른쪽의 r번째 원소를 새 배열에 넣고 r과 idx를 1
 			 * 증가시킨다.
 			 */
 			else {
-				System.out.println("");
-				System.out.println("else");
 				sorted[idx] = a[r];
-				System.out.println("idx= "+ idx);
-				System.out.println("sorted[idx]= "+sorted[idx]);
 				idx++;
 				r++;
-				System.out.println("idx++= "+ idx);
-				System.out.println("r++= "+ r);
 			}
 		}
 
@@ -134,18 +105,10 @@ public class test2 {
 		 * 나머지 원소들을 새 배열에 채워준다.
 		 */
 		if (l > mid) {
-			System.out.println("");
-			System.out.println("ifif");
 			while (r <= right) {
-				System.out.println("while---if");
-				
 				sorted[idx] = a[r];
-				System.out.println("idx= "+ idx);
-				System.out.println("sorted[idx]"+sorted[idx]);
 				idx++;
 				r++;
-				System.out.println("idx++= "+ idx);
-				System.out.println("r++= "+ r);
 			}
 		}
 
@@ -154,19 +117,10 @@ public class test2 {
 		 * 부분리스트의 나머지 원소들을 새 배열에 채워준다.
 		 */
 		else {
-			System.out.println("");
-			System.out.println("elseelse");
-
 			while (l <= mid) {
-				System.out.println("while---else");
-
 				sorted[idx] = a[l];
-				System.out.println("idx= "+ idx);
-				System.out.println("sorted[idx]"+sorted[idx]);
 				idx++;
 				l++;
-				System.out.println("idx++= "+ idx);
-				System.out.println("l++= "+ l);
 			}
 		}
 
@@ -175,9 +129,6 @@ public class test2 {
 		 */
 		for (int i = left; i <= right; i++) {
 			a[i] = sorted[i];
-			System.out.println("******************병합 : a["+i+"]="+a[i]);
 		}
-		System.out.println("");
-		System.out.println("병합끝...");
 	}
 }

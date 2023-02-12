@@ -38,7 +38,8 @@ public class B2751 {
 		temp = null;
 	}
 	
-
+	// Top-Down 방식 구현
+	// 오버로딩
 	private static void mergeSort(int[] arr, int left, int right) {
 		
 		if (left==right) {
