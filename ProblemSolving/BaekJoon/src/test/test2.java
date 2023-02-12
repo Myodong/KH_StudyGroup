@@ -11,7 +11,7 @@ public class test2 {
 
 	/*병합 정렬 Top-Down 방식 */
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws NumberFormatException, IOException {
 
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -22,7 +22,7 @@ public class test2 {
 			nNum[i] = Integer.parseInt(bf.readLine());
 		}
 
-		Arrays.sort(nNum);
+		merge_sort(nNum);
 
 		bw.write("\n");//줄바꿈
 		for (int x = 0; x < nNum.length; x++) {

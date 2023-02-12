@@ -1,35 +1,33 @@
 package test;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.io.OutputStreamWriter;
 
 public class test3 {
 
 	/*병합 정렬 Bottom-Up 방식 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws NumberFormatException, IOException {
 
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-
-		// 입력
-		System.out.print("N개입력 : ");
-		// 입력 받은 정수 값 으로  배열인덱스 설정
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		
 		int nNum[] = new int[Integer.parseInt(bf.readLine())];
 		
-		// for문 으로 인덱스 길이만큼 값 넣기
 		for (int i = 0; i < nNum.length; i++) {
 			nNum[i] = Integer.parseInt(bf.readLine());
 		}
-		// 줄 띄우기
-		System.out.println("");
-		// 배열 오름차순 
-		Arrays.sort(nNum);
-		
-		// for문 으로 출력하기
+
+		merge_sort(nNum);
+
+		bw.write("\n");//줄바꿈
 		for (int x = 0; x < nNum.length; x++) {
-			System.out.println(nNum[x]);
+            bw.write(String.valueOf(nNum[x])+"\n");
 		}
+		bw.flush();
+		bw.close();
 	}
 
 	private static int[] sorted; // 합치는 과정에서 정렬하여 원소를 담을 임시배열
