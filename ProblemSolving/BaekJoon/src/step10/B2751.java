@@ -12,16 +12,11 @@ public class B2751 {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		
 
-		System.out.print("N개입력 : ");
-
 		int nNum[] = new int[Integer.parseInt(bf.readLine())];
 		
 		for (int i = 0; i < nNum.length; i++) {
 			nNum[i] = Integer.parseInt(bf.readLine());
 		}
-
-		System.out.println("---------------------");
-		
 
 		Arrays.sort(nNum);
 		
@@ -56,11 +51,11 @@ public class B2751 {
 
 	private static void merge(int[] arr, int left, int mid, int right) {
 		
-		int mergeright = mid+1; 
+		int mergeRight = mid+1; 
 		int mergeLeft = left; 
 		int idx = left; 
 		
-		while (mergeLeft<=mid  && mergeright<=right) {
+		while (mergeLeft<=mid  && mergeRight<=right) {
 			
 			if (arr[mergeLeft]<=arr[right]) {
 				temp[idx] = arr[mergeLeft];
@@ -68,16 +63,28 @@ public class B2751 {
 				idx++;
 				
 			} else {
-				temp[idx] = arr[mergeright];
-				mergeright++;
+				temp[idx] = arr[mergeRight];
+				mergeRight++;
 				idx++;
 			}
 		}
 		
-		if (condition) {
-			
+		if (mergeLeft>mid) {
+			while (mergeRight<=right) {
+				temp[idx]=arr[mergeRight];
+				idx++;
+				mergeRight++;
+			}
+		}else {
+			while (mergeRight<=mid) {
+				temp[idx]=arr[mergeLeft];
+				idx++;
+				mergeLeft++;
+			}
 		}
-		
+		for (int i = left; i <= right; i++) {
+			arr[i]=temp[i];
+		}
 	}
 	
 

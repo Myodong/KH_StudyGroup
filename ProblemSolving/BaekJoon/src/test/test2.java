@@ -56,6 +56,7 @@ public class test2 {
 		int mid = (left + right) / 2; // 절반 위치
 		System.out.println("절반위치" + mid);
 
+		// 재귀
 		merge_sort(a, left, mid); // 절반 중 왼쪽 부분리스트(left ~ mid)'
 			System.out.println("리턴하고 실행");
 			System.out.println("left는 " + left );
@@ -97,18 +98,34 @@ public class test2 {
 			 * 증가시킨다.
 			 */
 			if (a[l] <= a[r]) {
+				System.out.println("");
+				System.out.println("if");
+				System.out.println("a[l]= "+a[l]);
+				System.out.println("a[r]= "+a[r]);
+				System.out.println("l= "+l);
+				System.out.println("r= "+r);
+				System.out.println("idx= "+idx);
 				sorted[idx] = a[l];
+				System.out.println("sorted[idx]= "+sorted[idx]);
 				idx++;
 				l++;
+				System.out.println("idx++= "+ idx);
+				System.out.println("l++= "+ l);
 			}
 			/*
 			 * 오른쪽 부분리스트 r번째 원소가 왼쪽 부분리스트 l번째 원소보다 작거나 같을 경우 오른쪽의 r번째 원소를 새 배열에 넣고 r과 idx를 1
 			 * 증가시킨다.
 			 */
 			else {
+				System.out.println("");
+				System.out.println("else");
 				sorted[idx] = a[r];
+				System.out.println("idx= "+ idx);
+				System.out.println("sorted[idx]= "+sorted[idx]);
 				idx++;
 				r++;
+				System.out.println("idx++= "+ idx);
+				System.out.println("r++= "+ r);
 			}
 		}
 
@@ -117,10 +134,18 @@ public class test2 {
 		 * 나머지 원소들을 새 배열에 채워준다.
 		 */
 		if (l > mid) {
+			System.out.println("");
+			System.out.println("ifif");
 			while (r <= right) {
+				System.out.println("while---if");
+				
 				sorted[idx] = a[r];
+				System.out.println("idx= "+ idx);
+				System.out.println("sorted[idx]"+sorted[idx]);
 				idx++;
 				r++;
+				System.out.println("idx++= "+ idx);
+				System.out.println("r++= "+ r);
 			}
 		}
 
@@ -129,10 +154,19 @@ public class test2 {
 		 * 부분리스트의 나머지 원소들을 새 배열에 채워준다.
 		 */
 		else {
+			System.out.println("");
+			System.out.println("elseelse");
+
 			while (l <= mid) {
+				System.out.println("while---else");
+
 				sorted[idx] = a[l];
+				System.out.println("idx= "+ idx);
+				System.out.println("sorted[idx]"+sorted[idx]);
 				idx++;
 				l++;
+				System.out.println("idx++= "+ idx);
+				System.out.println("l++= "+ l);
 			}
 		}
 
@@ -141,7 +175,9 @@ public class test2 {
 		 */
 		for (int i = left; i <= right; i++) {
 			a[i] = sorted[i];
+			System.out.println("******************병합 : a["+i+"]="+a[i]);
 		}
+		System.out.println("");
 		System.out.println("병합끝...");
 	}
 }
