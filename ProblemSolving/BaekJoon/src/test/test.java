@@ -36,6 +36,20 @@ public class test {
 			sum += input[i];
 		}
 		
+		// 최빈값??
+		
+		//최댓값 구하기
+		int max = input[0];
+		for(int i=1; i<input.length; i++) { 
+			if(max < input[i]) max = input[i]; 
+		}
+		
+		// 최솟값 구하기
+		int min = input[0]; 
+		for(int i=1; i<input.length; i++) {
+			if(min > input[i]) min = input[i]; 
+		}
+		
 		
 		System.out.println("---");
 		System.out.println("sum="+sum);
@@ -43,6 +57,7 @@ public class test {
         bw.write("1번="+Math.round(sum/length)+"\n");
         bw.write("2번="+input[(int) (length/2)]+"\n");
         bw.write("3번="+"\n");
+        bw.write("4번="+(max-min)+"\n");
 //		System.out.println((5+1+3+8+-2+2)/6);
 		bw.flush();
 		bw.close();
