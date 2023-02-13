@@ -18,19 +18,25 @@ public class test {
 		int num = Integer.parseInt(bf.readLine());
 		int input[] = new int[num];
 		
+		// 누적값 
+		double sum =0;
+		// 최댓값 
+		int max = input[0];
+		// 최솟값 
+		int min = input[0]; 
+
 		
 		// 인덱스 길이에 값 입력
 		for (int i = 0; i < input.length; i++) {
 			input[i] = Integer.parseInt(bf.readLine());
 		}
+		
 		// 인덱스 값 오름차순 정렬
 		Arrays.sort(input);
 		
 		// 배열의 길이
 		double length = input.length;
 		
-		// 누적값 선언
-        double sum =0;
 
 		// 인덱스 값 누적
 		for (int i = 0; i < input.length; i++) {
@@ -39,14 +45,12 @@ public class test {
 		
 		// 최빈값??
 		
-		//최댓값 구하기
-		int max = input[0];
+		// 최댓값 구하기
 		for(int i=1; i<input.length; i++) { 
 			if(max < input[i]) max = input[i]; 
 		}
 		
 		// 최솟값 구하기
-		int min = input[0]; 
 		for(int i=1; i<input.length; i++) {
 			if(min > input[i]) min = input[i]; 
 		}
