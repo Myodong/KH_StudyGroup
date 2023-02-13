@@ -1,4 +1,4 @@
-package step10;
+package step10sort;
 
 public class B2108 {
 

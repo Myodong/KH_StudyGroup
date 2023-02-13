@@ -1,4 +1,4 @@
-package step10;
+package step10sort;
 
 import java.io.BufferedReader;
 import java.io.IOException;

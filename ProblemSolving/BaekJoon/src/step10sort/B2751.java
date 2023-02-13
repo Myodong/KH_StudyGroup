@@ -1,13 +1,16 @@
-package step10;
+package step10sort;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 public class B2751 {
 
 	public static void main(String[] args) throws Exception {
 
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
 		int nNum[] = new int[Integer.parseInt(bf.readLine())];
 		
@@ -18,8 +21,10 @@ public class B2751 {
 		mergeSort(nNum);
 
 		for (int x = 0; x < nNum.length; x++) {
-			System.out.println(nNum[x]);
+            bw.write(String.valueOf(nNum[x])+"\n");
 		}
+		bw.flush();
+		bw.close();
 	}
 	
 	public static int[] temp; 
