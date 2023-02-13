@@ -15,7 +15,8 @@ public class test {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		// 인덱스 길이 입력
-		int input[] = new int[Integer.parseInt(bf.readLine())];
+		int num = Integer.parseInt(bf.readLine());
+		int input[] = new int[num];
 		
 		
 		// 인덱스 길이에 값 입력
