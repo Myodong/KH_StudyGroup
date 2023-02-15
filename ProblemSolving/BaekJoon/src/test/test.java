@@ -59,6 +59,8 @@ public class test {
 		System.out.println("---");
 		System.out.println("sum="+sum);
 		System.out.println("length="+length);
+		
+		
         bw.write("1번="+Math.round(sum/length)+"\n");
         bw.write("2번="+input[(int) (length/2)]+"\n");
         bw.write("3번="+"\n");
