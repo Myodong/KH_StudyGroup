@@ -1,15 +1,12 @@
-package test;
+package step10sort;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
-import java.util.Scanner;
 
-public class test2 {
-
+public class B2108S {
 	public static void main(String[] args) throws Exception {
 
 		// 선언
@@ -80,7 +77,6 @@ public class test2 {
 		for (int i = min + 4000; i <= max + 4000; i++) {
 
 			if (arr[i] > 0) {
-
 				// 중앙값 찾기
 				// 누적횟수가 전체 전체 길이의 절반에 못 미친다면
 				if (count < (inputN + 1) / 2) {
@@ -88,21 +84,25 @@ public class test2 {
 					count += arr[i];
 					median = i - 4000;
 				}
-
 				// 최빈값 찾기
 				// 이전 최빈값보다 현재 값의 빈도수가 더 높을 경우
 				if (modeMax < arr[i]) {
+					System.out.println("----------IF----------");
 					modeMax = arr[i];
 					mode = i - 4000;
+					System.out.println("modeMax="+ modeMax);
+					System.out.println("mode   ="+ mode);
 					// 처음일때 true 로 변경
 					flag = true;
+					System.out.println("flag   ="+flag);
 				}
 				// 이전 최빈값 최댓값과 동일한 경우, 한 번만 중복되는 경우
 				else if (modeMax == arr[i] && flag == true) {
+					System.out.println("----------Else IF----------");
 					mode = i - 4000;
 					flag = false;
-
-
+					System.out.println("mode   ="+ mode);
+					System.out.println("flag   ="+ flag);
 				}
 			}
 		}
