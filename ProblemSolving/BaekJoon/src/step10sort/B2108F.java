@@ -23,52 +23,46 @@ public class B2108F {
 		// 누적값 
 		double sum =0;
 		// 최댓값 
-		int max = 0;
+		// -2147483648
+		int max = Integer.MIN_VALUE;
 		// 최솟값 
-		int min = 0; 
-		// 최빈값
-		int mode = 0;
-
+		// 2147483647
+		int min = Integer.MAX_VALUE; 
 		
+		//-4000~4000 을 제외한 수로 초기화
+		// 최빈값
+		int mode = 5000;
+		// 중앙 값
+		int median= 5000;
+
+		// 입력받은 inputN 값 만큼 for문 돌리기
 		for (int i = 0; i < inputN; i++) {
 			// 값 입력 받기 
 			int value = Integer.parseInt(bf.readLine());
 			// 누적값 구하기
 			sum +=value;
-			// 
+			// 카운팅
 			arr[value+4000]++;
+			
+			// 최소/최대 값 구하기
+			if(max < value) {
+				max = value;
+			}
+			if(min > value) {
+				min = value;
+			}
 		}
 		
 		// 인덱스 값 오름차순 정렬
 		Arrays.sort(input);
 		
-		// 배열의 길이
-		double length = input.length;
-		
-
-		
-		// 최빈값??
-		
-		// 최댓값 구하기
-		for(int i=1; i<input.length; i++) { 
-			if(max < input[i]) max = input[i]; 
-		}
-		
-		// 최솟값 구하기
-		for(int i=1; i<input.length; i++) {
-			if(min > input[i]) min = input[i]; 
-		}
 		
 		
-		System.out.println("---");
-		System.out.println("sum="+sum);
-		System.out.println("length="+length);
 		
-		
-        bw.write("1번="+Math.round(sum/length)+"\n");
-        bw.write("2번="+input[(int) (length/2)]+"\n");
-        bw.write("3번="+"\n");
-        bw.write("4번="+(max-min)+"\n");
+        bw.write("1번 산술평균="+Math.round((double)sum/inputN)+"\n");
+        bw.write("2번 중앙값  ="+input[(int) (length/2)]+"\n");
+        bw.write("3번 최빈값  ="+"\n");
+        bw.write("4번 범위    ="+(max-min));
 //		System.out.println((5+1+3+8+-2+2)/6);
 		bw.flush();
 		bw.close();

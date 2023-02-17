@@ -36,9 +36,6 @@ public class test2 {
 			int value = in.nextInt();
 			sum += value;
 			arr[value + 4000]++;
-			System.out.println(value);
-			System.out.println(arr[value + 4000]);
-//			System.out.println(arr[value + 4000]);
 		
 			if(max < value) {
 				max = value;
