@@ -30,11 +30,16 @@ public class test {
 		// 그럼 다시 정리하면
 		// int[arr[4]-arr[0]+1];
 		//int[8 - -2 + 1] 이기에 - -는 연산하면 + 이므로 = 8+2+1 이다
+		// 그러므로 counting 의 길이는 [11] 이다
 		int[] counting = new int[arr[arr.length-1]-arr[0]+1];
+		
+		// ?????????????
 		boolean flag = true;
+		
 		
 		for(int i=0;i<arr.length;i++ ) {
 			result[0]+=arr[i];
+			// 개수 카운팅
 			counting[arr[i]-arr[0]]+=1;
 		}
 		if(result[0] >=0) {
@@ -44,6 +49,7 @@ public class test {
 		}
 		
 		int max =0;
+		// arr 길이가 5라 가정하자
 		int[] index = new int[arr.length+1];
 		int c = 0;
 		for(int i=0;i<counting.length;i++ ) { 

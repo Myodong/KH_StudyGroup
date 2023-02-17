@@ -6,178 +6,89 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class test2 {
 
-	/*병합 정렬 Top-Down 방식 */
-
-	public static void main(String[] args) throws NumberFormatException, IOException {
-
-		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
 		
-		int nNum[] = new int[Integer.parseInt(bf.readLine())];
+		int N = in.nextInt();
 		
-		for (int i = 0; i < nNum.length; i++) {
-			nNum[i] = Integer.parseInt(bf.readLine());
-		}
-
-		merge_sort(nNum);
-
-		bw.write("\n");//줄바꿈
-		for (int x = 0; x < nNum.length; x++) {
-            bw.write(String.valueOf(nNum[x])+"\n");
-		}
-		bw.flush();
-		bw.close();
-	}
-
-	private static int[] sorted; // 합치는 과정에서 정렬하여 원소를 담을 임시배열
-
-	public static void merge_sort(int[] a) {
-
-		sorted = new int[a.length]; // 배열 길이 
-		merge_sort(a, 0, a.length - 1); // 배열, 0인덱스 시작, 마지막인덱스 시작
-		sorted = null;
-	}
-
-	// Top-Down 방식 구현
-	private static void merge_sort(int[] a, int left, int right) {
-		System.out.println("쪼개집니당...");
+		// 입력값의 범위 : -4000 ~ 4000
+		int[] arr = new int[8001];
+		
 		/*
-		 * left==right 즉, 부분리스트가 1개의 원소만 갖고있는경우 더이상 쪼갤 수 없으므로 return한다.
+		 *  sum = 총 합계 
+		 *  max = 최댓값
+		 *  min = 최솟값 
+		 *  median = 중앙값
+		 *  mode = 최빈값 
 		 */
-		if (left == right) {
-			System.out.println("리턴");
-			System.out.println();
-			return;
-		}
-
-		int mid = (left + right) / 2; // 절반 위치
-		System.out.println("절반위치" + mid);
-
-		// 재귀
-		merge_sort(a, left, mid); // 절반 중 왼쪽 부분리스트(left ~ mid)'
-			System.out.println("리턴하고 실행");
-			System.out.println("left는 " + left );
-			System.out.println("mid는 " + mid );
-			System.out.println("right는 " + right );
-			System.out.println();
-		merge_sort(a, mid + 1, right); // 절반 중 오른쪽 부분리스트(mid+1 ~ right)
+		int sum = 0;
+		int max = Integer.MIN_VALUE;
+		int min = Integer.MAX_VALUE;
+		// median 과 mode 는 -4000~4000 을 제외한 수로 초기화하면 된다.
+		int median = 10000;
+		int mode = 10000;
 		
-		merge(a, left, mid, right); // 병합작업
-
-	}
-
-	/**
-	 * 합칠 부분리스트는 a배열의 left ~ right 까지이다.
-	 * 
-	 * @param a     정렬할 배열
-	 * @param left  배열의 시작점
-	 * @param mid   배열의 중간점
-	 * @param right 배열의 끝 점
-	 */
-	private static void merge(int[] a, int left, int mid, int right) {
-		System.out.println("병합...");
-		int l = left; // 왼쪽 부분리스트 시작점
-		int r = mid + 1; // 오른쪽 부분리스트의 시작점
-		int idx = left; // 채워넣을 배열의 인덱스
-
-		while (l <= mid && r <= right) {
-			System.out.println("---");
-			System.out.println("병합mid==" +mid);
-			System.out.println("병합right==" +right);
-			System.out.println("병합l=left==" +left);
-			System.out.println("병합r=mid+1==" +(mid+ 1));
-			System.out.println("병합idx==" +left);
-			System.out.println("---");
-
+		for(int i = 0; i < N; i++) {
+			int value = in.nextInt();
+			sum += value;
+			arr[value + 4000]++;
+			System.out.println(value);
+			System.out.println(arr[value + 4000]);
+//			System.out.println(arr[value + 4000]);
+		
+			if(max < value) {
+				max = value;
+			}
+			if(min > value) {
+				min = value;
+			}
+		}
+		
+		
+		// 순회 
+		int count = 0;	// 중앙값 빈도 누적 수 
+		int mode_max = 0; 	// 최빈값의 최댓값  
+		
+		// 이전의 동일한 최빈값이 1번만 등장했을경우 true, 아닐경우 false
+		boolean flag = false;	 
+		
+		for(int i = min + 4000; i <= max + 4000; i++) {
 			
-			/*
-			 * 왼쪽 부분리스트 l번째 원소가 오른쪽 부분리스트 r번째 원소보다 작거나 같을 경우 왼쪽의 l번째 원소를 새 배열에 넣고 l과 idx를 1
-			 * 증가시킨다.
-			 */
-			if (a[l] <= a[r]) {
-				System.out.println("");
-				System.out.println("if");
-				System.out.println("a[l]= "+a[l]);
-				System.out.println("a[r]= "+a[r]);
-				System.out.println("l= "+l);
-				System.out.println("r= "+r);
-				System.out.println("idx= "+idx);
-				sorted[idx] = a[l];
-				System.out.println("sorted[idx]= "+sorted[idx]);
-				idx++;
-				l++;
-				System.out.println("idx++= "+ idx);
-				System.out.println("l++= "+ l);
-			}
-			/*
-			 * 오른쪽 부분리스트 r번째 원소가 왼쪽 부분리스트 l번째 원소보다 작거나 같을 경우 오른쪽의 r번째 원소를 새 배열에 넣고 r과 idx를 1
-			 * 증가시킨다.
-			 */
-			else {
-				System.out.println("");
-				System.out.println("else");
-				sorted[idx] = a[r];
-				System.out.println("idx= "+ idx);
-				System.out.println("sorted[idx]= "+sorted[idx]);
-				idx++;
-				r++;
-				System.out.println("idx++= "+ idx);
-				System.out.println("r++= "+ r);
-			}
-		}
-
-		/*
-		 * 왼쪽 부분리스트가 먼저 모두 새 배열에 채워졌을 경우 (l > mid) = 오른쪽 부분리스트 원소가 아직 남아있을 경우 오른쪽 부분리스트의
-		 * 나머지 원소들을 새 배열에 채워준다.
-		 */
-		if (l > mid) {
-			System.out.println("");
-			System.out.println("ifif");
-			while (r <= right) {
-				System.out.println("while---if");
+			if(arr[i] > 0) {
 				
-				sorted[idx] = a[r];
-				System.out.println("idx= "+ idx);
-				System.out.println("sorted[idx]"+sorted[idx]);
-				idx++;
-				r++;
-				System.out.println("idx++= "+ idx);
-				System.out.println("r++= "+ r);
+				/*
+				 * <중앙값 찾기>
+				 * 누적횟수가 전체 전체 길이의 절반에 못 미친다면 
+				 */
+				if(count < (N + 1) / 2) {
+					count += arr[i];	// i값의 빈도수를 count 에 누적
+					median = i - 4000;
+				}
+				
+				/*
+				 * <최빈값 찾기>
+				 * 이전 최빈값보다 현재 값의 빈도수가 더 높을 경우 
+				 */
+				if(mode_max < arr[i]) {
+					mode_max = arr[i];
+					mode = i - 4000;
+					flag = true;	// 첫 등장이므로 true 로 변경 
+				}
+				// 이전 최빈값 최댓값과 동일한 경우면서 한 번만 중복되는 경우 
+				else if(mode_max == arr[i] && flag == true) {
+					mode = i - 4000;
+					flag = false;					
+				}
 			}
 		}
-
-		/*
-		 * 오른쪽 부분리스트가 먼저 모두 새 배열에 채워졌을 경우 (r > right) = 왼쪽 부분리스트 원소가 아직 남아있을 경우 왼쪽
-		 * 부분리스트의 나머지 원소들을 새 배열에 채워준다.
-		 */
-		else {
-			System.out.println("");
-			System.out.println("elseelse");
-
-			while (l <= mid) {
-				System.out.println("while---else");
-
-				sorted[idx] = a[l];
-				System.out.println("idx= "+ idx);
-				System.out.println("sorted[idx]"+sorted[idx]);
-				idx++;
-				l++;
-				System.out.println("idx++= "+ idx);
-				System.out.println("l++= "+ l);
-			}
-		}
-
-		/*
-		 * 정렬된 새 배열을 기존의 배열에 복사하여 옮겨준다.
-		 */
-		for (int i = left; i <= right; i++) {
-			a[i] = sorted[i];
-			System.out.println("******************병합 : a["+i+"]="+a[i]);
-		}
-		System.out.println("");
-		System.out.println("병합끝...");
+		
+		System.out.println((int)Math.round((double)sum / N));	// 산술평균 
+		System.out.println(median);	// 중앙값 
+		System.out.println(mode);	// 최빈값 
+		System.out.println(max - min);	// 범위 
 	}
 }
