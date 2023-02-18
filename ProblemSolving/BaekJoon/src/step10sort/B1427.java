@@ -5,7 +5,7 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
-import java.util.Iterator;
+import java.util.Collections;
 import java.util.stream.Stream;
 
 public class B1427 {
@@ -23,23 +23,26 @@ public class B1427 {
 		// Stream으로 String 배열을 int 배열로 변환
         int[] intArr = Stream.of(inputN).mapToInt(Integer::parseInt).toArray();
 
+		// 큌정렬 내림차순
+
+        
+        
+        
+        
 		
-        Arrays.sort(intArr);
+        System.out.println("입력 값 = "+Arrays.toString(inputN));
+		System.out.println("정렬 값 = "+Arrays.toString(intArr));
 		
-        System.out.println("입력받은 값= "+Arrays.toString(inputN));
-		System.out.println("정렬된 값  =  "+Arrays.toString(intArr));
-		
-		// 정렬된 배열값 출력하기
+		// 정렬된 배열값 BufferedWriter 넣기 
 		for (int i = 0; i < intArr.length; i++) {
-//			bw.write(String.valueOf(intArr[i]));
-			//둘중 뭐가더 빠를까???
-			bw.write(intArr[i]+"");
+			bw.write(String.valueOf(intArr[i]));
 		}
 		
 		long afterTime = System.currentTimeMillis(); // 코드 실행 후에 시간 받아오기
-		long secDiffTime = (afterTime - beforeTime)/1000; //두 시간에 차 계산
-		System.out.println("시간차이(m) : "+secDiffTime);
-		bw.flush();
+		long secDiffTime = (afterTime - beforeTime); //두 시간에 차 계산
+		System.out.println("시간차이(ms) : "+secDiffTime);
+		
+		// 정렬된 배열 값 출력 및 스트림 닫기
 		bw.close();
 	}
 
