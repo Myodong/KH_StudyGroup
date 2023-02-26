@@ -17,10 +17,14 @@ public class B1181 {
 		// 중복 된 값 넣는 배열 선언
 		String arr1[] = new String[inputN];
 
+		// 중복여부 
 		boolean duplicate = false;
+		// 중복 갯수 카운트
 		int count = 0;
+		// 배열길이 구하는용도
 		int indexN = 0;
 
+		
 		// 배열의 길이만큼 값 넣어주기
 		for (int i = 0; i < arr1.length; i++) {
 			arr1[i] = br.readLine();
@@ -42,7 +46,7 @@ public class B1181 {
 		// 중복 제거 
 		for (int x = 0; x < arr1.length; x++) {
 
-			// 0번 인덱스 비교할 값 없으니 조건 추가
+			// 0번 인덱스 비교할 값이 없으므로 0번 인덱스 아닐때 조건 추가
 			if (x!=0) {
 				
 				for (int j = 0; j < x; j++) {
@@ -65,8 +69,8 @@ public class B1181 {
 		}
 		
 		
-		// 정렬 코드
-		
+		// 힙정렬 코드
+		// 아스키코드 이용하여 비교
 		
 		
 		
@@ -80,9 +84,5 @@ System.out.println("---------");
 		}
 		// 출력 후 스트림 닫기
 		bw.close();
-		
 	}
-	
-	
-
 }
