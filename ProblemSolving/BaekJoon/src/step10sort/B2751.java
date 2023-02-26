@@ -33,7 +33,7 @@ public class B2751 {
 		
 		temp = new int[arr.length];
 		mergeSort(arr,0, arr.length-1);
-		temp = null;
+//		temp = null;
 	}
 	
 	// Top-Down 방식 구현
