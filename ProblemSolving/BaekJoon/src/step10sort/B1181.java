@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
 
 public class B1181 {
 
@@ -38,7 +37,7 @@ public class B1181 {
 		}
 		
 		// 중복 제거된 배열 선언
-		String arr2[] = new String[(inputN-count)];
+		String arr2[] = new String[inputN-count];
 
 		// 중복 제거 
 		for (int x = 0; x < arr1.length; x++) {
@@ -67,6 +66,12 @@ public class B1181 {
 		
 		
 		// 정렬 코드
+		
+		
+		
+		
+		
+		
 System.out.println("---------");
 		
 		// 출력문
