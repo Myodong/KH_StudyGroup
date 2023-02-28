@@ -1,12 +1,7 @@
 package test;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.Arrays;
-
 public class test {
+	static int[] a = {2,5,3,7,8,4}; 
 
 	// 부모 인덱스를 얻는 함수
 		private static int getParent(int child) {
@@ -14,7 +9,7 @@ public class test {
 		}
 	 
 		// 두 인덱스의 원소를 교환하는 함수
-		private static void swap(int[] a, int i, int j) {
+		private static void swap(int i, int j) {
 			int temp = a[i];
 			a[i] = a[j];
 			a[j] = temp;
@@ -22,7 +17,7 @@ public class test {
 		
 	 
 		// 힙을 만드는 함수
-		private static void heapify(int[] a, int parentIdx, int lastIdx) {
+		private static void heapify(int parentIdx, int lastIdx) {
 			
 			/*
 			 * 현재 트리에서 부모 노드의 자식노드 인덱스를 각각 구해준다.
@@ -63,8 +58,8 @@ public class test {
 			 * 교환 된 자식노드를 부모노드로 삼은 서브트리를 검사하도록 재귀 호출 한다.
 			 */
 			if(parentIdx != largestIdx) {
-				swap(a, largestIdx, parentIdx);
-				heapify(a, largestIdx, lastIdx);
+				swap(largestIdx, parentIdx);
+				heapify(largestIdx, lastIdx);
 			}
 		}
 }
