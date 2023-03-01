@@ -1,7 +1,32 @@
 package test;
 
 public class test {
+	
 	static int[] a = {2,5,3,7,8,4}; 
+	
+	
+	public static void heapsort() {
+		int size = a.length;
+ 
+		/*
+		 * 부모노드와 heaify과정에서 음수가 발생하면 잘못 된 참조가 발생하기 때문에
+		 * 원소가 1개이거나 0개일 경우는 정렬 할 필요가 없으므로 바로 함수를 종료한다.
+		 */
+		if(size < 2) {
+			return;
+		}
+		// 가장 마지막 노드의 부모 노드 인덱스 
+		int parentIdx = getParent(size - 1);
+		
+		// max heap 만들기
+		for(int i = parentIdx; i >= 0; i--) {
+ 
+			// 부모노드(i값)을 1씩 줄이면서 heap 조건을 만족시키도록 재구성한다.
+			heapify( i, size - 1);
+		}
+ 
+	}
+	
 
 	// 부모 인덱스를 얻는 함수
 		private static int getParent(int child) {
