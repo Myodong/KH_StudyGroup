@@ -1,9 +1,20 @@
 package test;
 
+import java.util.Arrays;
+
 public class test {
 	
-	static int[] a = {2,5,3,7,8,4}; 
+//	static int[] a = {2,5,3,7,8,4}; 
+	static int[] a = {3,7,5,4,2,8}; 
 	
+	
+	public static void main(String[] args) {
+		
+		heapsort();
+		
+		System.out.println(Arrays.toString(a));
+		
+	}
 	
 	public static void heapsort() {
 		int size = a.length;
@@ -23,6 +34,13 @@ public class test {
  
 			// 부모노드(i값)을 1씩 줄이면서 heap 조건을 만족시키도록 재구성한다.
 			heapify( i, size - 1);
+		}
+		
+		
+		// 정렬하기
+		for (int i = size -1; i >0; i--) {
+			swap(0, i);
+			heapify(0, i-1);
 		}
  
 	}

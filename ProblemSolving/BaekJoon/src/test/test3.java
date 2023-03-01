@@ -9,150 +9,115 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class test3 {
+	static int a[] = {3,7,5,4,2,8};
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-		// 1. 첫번째 입력값(앞으로 나올 수의 길이)를 정수형으로 바꾸는 작업
-		int number = Integer.parseInt(br.readLine());
-
-		// 2. int형 배열을 만든 후, 각각의 입력값(String)을 int 배열에 넣어준다.
-		int[] arr = new int[number];
-		for (int i = 0; i < number; i++) {
-			arr[i] = Integer.parseInt(br.readLine());
-		}
-
-		// 정렬하기
-		sort(arr);
-
-		// 출력
-		for (int i = 0; i < number; i++) {
-			System.out.println(arr[i]);
-		}
+		sort(a);
+		
+		System.out.println(Arrays.toString(a));
 
 	}
+
 	public static void sort(int[] a) {
-		l_pivot_sort(a, 0, a.length - 1);
-		// a = 정렬할 배열
-		// 0 = 시작 레프트
-		// a.length - 1 =배열 마지막 인덱스
+		sort(a, a.length);
 	}
 	
-	/**
-	 *  왼쪽 피벗 선택 방식
-	 * @param a		정렬할 배열
-	 * @param lo	현재 부분배열의 왼쪽
-	 * @param hi	현재 부분배열의 오른쪽
-	 */
-	private static void l_pivot_sort(int[] a, int lo, int hi) {
-		
+	private static void sort(int[] a, int size) {
+ 
 		/*
-		 *  lo가 hi보다 크거나 같다면 정렬 할 원소가 
-		 *  1개 이하이므로 정렬하지 않고 return한다.
+		 * 부모노드와 heaify과정에서 음수가 발생하면 잘못 된 참조가 발생하기 때문에
+		 * 원소가 1개이거나 0개일 경우는 정렬 할 필요가 없으므로 바로 함수를 종료한다.
 		 */
-		if(lo >= hi) {
+		if(size < 2) {
 			return;
 		}
-		
+ 
 		/*
-		 * 피벗을 기준으로 요소들이 왼쪽과 오른쪽으로 약하게 정렬 된 상태로
-		 * 만들어 준 뒤, 최종적으로 pivot의 위치를 얻는다.
-		 * 
-		 * 그리고나서 해당 피벗을 기준으로 왼쪽 부분리스트와 오른쪽 부분리스트로 나누어
-		 * 분할 정복을 해준다.
-		 * 
-		 * [과정]
-		 * 
-		 * Partitioning:
-		 *
-		 *   a[left]          left part              right part
-		 * +---------------------------------------------------------+
-		 * |  pivot  |    element <= pivot    |    element > pivot   |
-		 * +---------------------------------------------------------+
-		 *    
-		 *    
-		 *  result After Partitioning:
-		 *  
-		 *         left part          a[lo]          right part
-		 * +---------------------------------------------------------+
-		 * |   element <= pivot    |  pivot  |    element > pivot    |
-		 * +---------------------------------------------------------+
-		 *       
-		 *       
-		 *  result : pivot = lo     
-		 *       
-		 *
-		 *  Recursion:
-		 *  
-		 * l_pivot_sort(a, lo, pivot - 1)     l_pivot_sort(a, pivot + 1, hi)
-		 *  
-		 *         left part                           right part
-		 * +-----------------------+             +-----------------------+
-		 * |   element <= pivot    |    pivot    |    element > pivot    |
-		 * +-----------------------+             +-----------------------+
-		 * lo                pivot - 1        pivot + 1                 hi
-		 * 
+		 * left child node = index * 2 + 1
+		 * right child node = index * 2 + 2
+		 * parent node = (index - 1) / 2
 		 */
-		int pivot = partition(a, lo, hi);	
 		
-		l_pivot_sort(a, lo, pivot - 1);
-		l_pivot_sort(a, pivot + 1, hi);
-	}
-	
-	
-	
-	/**
-	 * pivot을 기준으로 파티션을 나누기 위한 약한 정렬 메소드
-	 * 
-	 * @param a		정렬 할 배열 
-	 * @param left	현재 배열의 가장 왼쪽 부분
-	 * @param right	현재 배열의 가장 오른쪽 부분
-	 * @return		최종적으로 위치한 피벗의 위치(lo)를 반환
-	 */
-	private static int partition(int[] a, int left, int right) {
+		// 가장 마지막 요소의 부모 인덱스 
+		int parentIdx = getParent(size - 1);
 		
-		int lo = left;
-		int hi = right;
-		int pivot = a[left];		// 부분리스트의 왼쪽 요소를 피벗으로 설정
+		// max heap
+		for(int i = parentIdx; i >= 0; i--) {
+			heapify(a, i, size - 1);
+		}
+ 
 		
-		// lo가 hi보다 작을 때 까지만 반복한다.
-		while(lo < hi) {
+		for(int i = size - 1; i > 0; i--) {
 			
 			/*
-			 * hi가 lo보다 크면서, hi의 요소가 pivot보다 작거나 같은 원소를
-			 * 찾을 떄 까지 hi를 감소시킨다.
+			 *  root인 0번째 인덱스와 i번째 인덱스의 값을 교환해준 뒤
+			 *  0 ~ (i-1) 까지의 부분트리에 대해 max heap을 만족하도록
+			 *  재구성한다.
 			 */
-			while(a[hi] > pivot && lo < hi) {
-				hi--;
-			}
-			
-			/*
-			 * hi가 lo보다 크면서, lo의 요소가 pivot보다 큰 원소를
-			 * 찾을 떄 까지 lo를 증가시킨다.
-			 */
-			while(a[lo] <= pivot && lo < hi) {
-				lo++;
-			}
-			
-			// 교환 될 두 요소를 찾았으면 두 요소를 바꾼다.
-			swap(a, lo, hi);
+			swap(a, 0, i);
+			heapify(a, 0, i - 1);
 		}
 		
-		
-		/*
-		 *  마지막으로 맨 처음 pivot으로 설정했던 위치(a[left])의 원소와 
-		 *  lo가 가리키는 원소를 바꾼다.
-		 */
-		swap(a, left, lo);
-		
-		// 두 요소가 교환되었다면 피벗이었던 요소는 lo에 위치하므로 lo를 반환한다.
-		return lo;
+	}
+	
+	
+	// 부모 인덱스를 얻는 함수
+	private static int getParent(int child) {
+	    return (child - 1) / 2;
 	}
  
+	// 두 인덱스의 원소를 교환하는 함수
 	private static void swap(int[] a, int i, int j) {
 		int temp = a[i];
 		a[i] = a[j];
 		a[j] = temp;
+	}
+	
+	// 힙을 재구성 하는 함수
+	private static void heapify(int[] a, int parentIdx, int lastIdx) {
+		
+		/*
+		 * 현재 트리에서 부모 노드의 자식노드 인덱스를 각각 구해준다.
+		 * 현재 부모 인덱스를 가장 큰 값을 갖고있다고 가정한다.
+		 */
+		int leftChildIdx = 2 * parentIdx + 1;
+		int rightChildIdx = 2 * parentIdx + 2;
+		int largestIdx = parentIdx;
+		
+		/*
+		 *  left child node와 비교
+		 *  
+		 *  자식노드 인덱스가 트리의 크기를 넘어가지 않으면서
+		 *  현재 가장 큰 인덱스보다 왼쪽 자식노드의 값이 더 클경우
+		 *  가장 큰 인덱스를 가리키는 largestIdx를 왼쪽 자식노드인덱스로 바꿔준다.
+		 *  
+		 */
+		if(leftChildIdx <= lastIdx && a[largestIdx] < a[leftChildIdx]) {
+			largestIdx = leftChildIdx;
+		}
+		
+		/*
+		 *  left right node와 비교
+		 *  
+		 *  자식노드 인덱스가 트리의 크기를 넘어가지 않으면서
+		 *  현재 가장 큰 인덱스보다 오른쪽 자식노드의 값이 더 클경우
+		 *  가장 큰 인덱스를 가리키는 largestIdx를 오른쪽 자식노드인덱스로 바꿔준다.
+		 *  
+		 */
+		if(rightChildIdx <= lastIdx && a[largestIdx] < a[rightChildIdx]) {
+			largestIdx = rightChildIdx;
+		}
+		
+		/*
+		 * largestIdx 와 부모노드가 같지 않다는 것은
+		 * 위 자식노드 비교 과정에서 현재 부모노드보다 큰 노드가 존재한다는 뜻이다.
+		 * 그럴 경우 해당 자식 노드와 부모노드를 교환해주고,
+		 * 교환 된 자식노드를 부모노드로 삼은 서브트리를 검사하도록 재귀 호출 한다.
+		 */
+		if(parentIdx != largestIdx) {
+			swap(a, largestIdx, parentIdx);
+			heapify(a, largestIdx, lastIdx);
+		}
 	}
 }
