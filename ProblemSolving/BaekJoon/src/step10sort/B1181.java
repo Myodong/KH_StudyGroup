@@ -134,7 +134,7 @@ public class B1181 {
 			
 			if(arr[leftChildIdx].length() == arr[largestIdx].length()) {
 				
-				if (arr[leftChildIdx].compareTo(arr[largestIdx])>arr[largestIdx].compareTo(arr[leftChildIdx])) {
+				if (arr[leftChildIdx].compareTo(arr[largestIdx])<arr[largestIdx].compareTo(arr[leftChildIdx])) {
 
 				}else {
 					largestIdx=leftChildIdx;
@@ -151,7 +151,7 @@ public class B1181 {
 			largestIdx = rightChildIdx;
 			if(arr[rightChildIdx].length() == arr[largestIdx].length()) {
 				
-				if (arr[rightChildIdx].compareTo(arr[largestIdx])<arr[largestIdx].compareTo(arr[rightChildIdx])) {
+				if (arr[rightChildIdx].compareTo(arr[largestIdx])>arr[largestIdx].compareTo(arr[rightChildIdx])) {
 					
 				}else {
 					largestIdx = rightChildIdx;
