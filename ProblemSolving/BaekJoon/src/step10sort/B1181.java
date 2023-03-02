@@ -111,7 +111,10 @@ public class B1181 {
 		}
 		
 		// 힙정렬하기
-		
+		for (int i = size -1; i >0; i--) {
+			swap(0, i);
+			heapify(0, i-1);
+		}
 	}
 
 
@@ -127,14 +130,28 @@ public class B1181 {
 		int largestIdx = parentIdx;
 		
 		// leftChild노드 와 비교
-		if (leftChildIdx<=lastIdx && arr[leftChildIdx].length() > arr[largestIdx].length()) {
-			largestIdx=leftChildIdx;
+		if (leftChildIdx<=lastIdx && arr[leftChildIdx].length() >= arr[largestIdx].length()) {
+			
+			if(arr[leftChildIdx].length() == arr[largestIdx].length()) {
+				arr[leftChildIdx].compareTo(arr[largestIdx]);
+				System.out.println("테스트"+			arr[leftChildIdx].compareTo(arr[largestIdx]));
+
+			}else {
+				largestIdx=leftChildIdx;
+			}
+			
 		}
 		
 		
 		// rightChild노드 와 비교
 		if (rightChildIdx<=lastIdx && arr[rightChildIdx].length() > arr[largestIdx].length()) {
 			largestIdx = rightChildIdx;
+			if(arr[rightChildIdx].length() == arr[largestIdx].length()) {
+				arr[rightChildIdx].compareTo(arr[largestIdx]);
+//System.out.println(				arr[rightChildIdx].compareTo(arr[largestIdx]));
+			}else {
+				largestIdx = rightChildIdx;
+			}
 		}
 		
 		
