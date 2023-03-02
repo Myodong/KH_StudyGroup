@@ -133,9 +133,12 @@ public class B1181 {
 		if (leftChildIdx<=lastIdx && arr[leftChildIdx].length() >= arr[largestIdx].length()) {
 			
 			if(arr[leftChildIdx].length() == arr[largestIdx].length()) {
-				arr[leftChildIdx].compareTo(arr[largestIdx]);
-				System.out.println("테스트"+			arr[leftChildIdx].compareTo(arr[largestIdx]));
+				
+				if (arr[leftChildIdx].compareTo(arr[largestIdx])>arr[largestIdx].compareTo(arr[leftChildIdx])) {
 
+				}else {
+					largestIdx=leftChildIdx;
+				}
 			}else {
 				largestIdx=leftChildIdx;
 			}
@@ -147,8 +150,12 @@ public class B1181 {
 		if (rightChildIdx<=lastIdx && arr[rightChildIdx].length() > arr[largestIdx].length()) {
 			largestIdx = rightChildIdx;
 			if(arr[rightChildIdx].length() == arr[largestIdx].length()) {
-				arr[rightChildIdx].compareTo(arr[largestIdx]);
-//System.out.println(				arr[rightChildIdx].compareTo(arr[largestIdx]));
+				
+				if (arr[rightChildIdx].compareTo(arr[largestIdx])<arr[largestIdx].compareTo(arr[rightChildIdx])) {
+					
+				}else {
+					largestIdx = rightChildIdx;
+				}
 			}else {
 				largestIdx = rightChildIdx;
 			}
