@@ -162,7 +162,7 @@ public class B1181 {
 		}
 		
 		
-		
+				
 		if (largestIdx != parentIdx) {
 			swap(largestIdx, parentIdx);
 			heapify(largestIdx, lastIdx);
