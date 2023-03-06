@@ -71,12 +71,6 @@ public class B1181 {
 		}
 
 		// 힙정렬 코드
-		// 아스키코드 이용하여 비교
-		// 길이가 짧은것부터
-		// 길이가 같으면 사전순
-
-		// 문자열 charat으로 하나씩잘라서 길이 확인
-		// 길이가 같다면 아스키 코드로변환 앞자리부터 비교
 		heapsort();
 
 		System.out.println("---------");
@@ -144,7 +138,6 @@ public class B1181 {
 			}else { // 문자열 길이가 같지 않을때
 				largestIdx=leftChildIdx;
 			}
-			
 		}
 		
 		// rightChild노드 와 비교
