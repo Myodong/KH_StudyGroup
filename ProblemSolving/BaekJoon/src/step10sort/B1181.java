@@ -132,42 +132,43 @@ public class B1181 {
 		// leftChild노드 와 비교
 		if (leftChildIdx<=lastIdx && arr[leftChildIdx].length() >= arr[largestIdx].length()) {
 			
+			// 문자열 길이가 같을때
 			if(arr[leftChildIdx].length() == arr[largestIdx].length()) {
 				
+				// compareTo 를 이용하여  leftChildIdx 값이 더 작다면
 				if (arr[leftChildIdx].compareTo(arr[largestIdx])<arr[largestIdx].compareTo(arr[leftChildIdx])) {
 
-				}else {
+				}else { // leftChildIdx 원소가 더 크다면
 					largestIdx=leftChildIdx;
 				}
-			}else {
+			}else { // 문자열 길이가 같지 않을때
 				largestIdx=leftChildIdx;
 			}
 			
 		}
 		
-		
 		// rightChild노드 와 비교
-		if (rightChildIdx<=lastIdx && arr[rightChildIdx].length() > arr[largestIdx].length()) {
-			largestIdx = rightChildIdx;
+		if (rightChildIdx<=lastIdx && arr[rightChildIdx].length() >= arr[largestIdx].length()) {
+			
+			// 문자열 길이가 같을때
 			if(arr[rightChildIdx].length() == arr[largestIdx].length()) {
 				
-				if (arr[rightChildIdx].compareTo(arr[largestIdx])>arr[largestIdx].compareTo(arr[rightChildIdx])) {
+				if (arr[rightChildIdx].compareTo(arr[largestIdx])<arr[largestIdx].compareTo(arr[rightChildIdx])) {
 					
 				}else {
 					largestIdx = rightChildIdx;
 				}
-			}else {
+			}else { // 문자열 길이가 같지 않을때
 				largestIdx = rightChildIdx;
 			}
 		}
 		
 		
-				
+		// largestIdx 원소가 변경 됬다면 스위치 
 		if (largestIdx != parentIdx) {
 			swap(largestIdx, parentIdx);
 			heapify(largestIdx, lastIdx);
 		}
-		
 	}
 
 	/** 인덱스 원소 바꾸기
@@ -178,7 +179,5 @@ public class B1181 {
 		String temp = arr[i];
 		arr[i] = arr[j];
 		arr[j] = temp;
-		
 	} 
-	
 }
