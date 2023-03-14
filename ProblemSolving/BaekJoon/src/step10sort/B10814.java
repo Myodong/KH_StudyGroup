@@ -4,61 +4,54 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
 
-public class B11650 {
+public class B10814 {
 
 	// 멤버 변수 선언
-	public static int[][] coordinate;
-	public static int[][] temp;
+	public static String member[][];
+	public static String temp [][];
 
 	public static void main(String[] args) throws Exception {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		// 입력 받을 값 갯수 인덱스 길이 값 입력 받기
+		// 입력 받을 원소 갯수 인덱스 길이 N 입력 받기
 		int inputN = Integer.parseInt(br.readLine());
 
 		// 2차원 배열 입력받은 인덱스 길이로 초기화
-		coordinate = new int[inputN][2];
+		member = new String[inputN][2];
 
-		// 2차원 배열에 입력받은 좌표 값 넣기
+		// 2차원 배열에 원소 입력 받기
 		for (int i = 0; i < inputN; i++) {
 			String[] xyNum = br.readLine().split(" ");
-			coordinate[i][0] = Integer.parseInt(xyNum[0]);
-			coordinate[i][1] = Integer.parseInt(xyNum[1]);
+			member[i][0] = xyNum[0];
+			member[i][1] = xyNum[1];
 		}
 
-		// 병합 정렬
-		// Top-Down 방식 구현
-		mergeSort();
+		// 병합정렬 Top-Down
+		mergeSort(0, member.length - 1);
 
 		// BufferedWriter에 출력 문 담기
 		for (int i = 0; i < inputN; i++) {
-			bw.write(coordinate[i][0] + " " + coordinate[i][1] + "\n");
+			bw.write(member[i][0] + " " + member[i][1] + "\n");
 		}
 		// 출력 후 스트림 닫기
 		bw.close();
+
 	}
 
-	private static void mergeSort() {
-
-		temp = new int[coordinate.length][2];
-		mergeSort(0, coordinate.length - 1);
-	}
-
-	// 오버로딩
 	private static void mergeSort(int left, int right) {
-		
+		temp = new String[member.length][2];
+
 		// 원소가 1개 일시 실행 안함
 		if (left == right) {
 			return;
 		}
-		
+
 		// 가운대 위치
 		int mid = (left + right) / 2;
-		
+
 		// 절반 중 왼쪽 부분리스트(left ~ mid)
 		mergeSort(left, mid);
 		// 절반 중 오른쪽 부분리스트(mid+1 ~ right)
@@ -68,7 +61,6 @@ public class B11650 {
 
 	}
 
-	// 병합 메서드
 	private static void merge(int left, int mid, int right) {
 		int mergeLeft = left; 
 		int mergeRight = mid+1; 
@@ -76,46 +68,33 @@ public class B11650 {
 		
 		while (mergeLeft<=mid  && mergeRight<=right) {
 			
-			if (coordinate[mergeLeft][0]<coordinate[mergeRight][0]) {
-				temp[idx] = coordinate[mergeLeft];
+			if (Integer.parseInt(member[mergeLeft][0])<=Integer.parseInt(member[mergeRight][0])) {
+				temp[idx] = member[mergeLeft];
 				mergeLeft++;
 				idx++;
 				
-			} else if (coordinate[mergeLeft][0]>coordinate[mergeRight][0]) {
-				temp[idx] = coordinate[mergeRight];
+			} else  {
+				temp[idx] = member[mergeRight];
 				mergeRight++;
 				idx++;
-				
-			} else { // 앞자리 값이 같을 경우
-				// 뒷자리 비교
-				if (coordinate[mergeLeft][1]<=coordinate[mergeRight][1]) {
-					temp[idx] = coordinate[mergeLeft];
-					mergeLeft++;
-					idx++;
-
-				}else {
-					temp[idx] = coordinate[mergeRight];
-					mergeRight++;
-					idx++;
-				}
 			}
 		}
 		
 		if (mergeLeft>mid) {
 			while (mergeRight<=right) {
-				temp[idx]=coordinate[mergeRight];
+				temp[idx]=member[mergeRight];
 				idx++;
 				mergeRight++;
 			}
 		}else {
 			while (mergeLeft<=mid) {
-				temp[idx]=coordinate[mergeLeft];
+				temp[idx]=member[mergeLeft];
 				idx++;
 				mergeLeft++;
 			}
 		}
 		for (int i = left; i <= right; i++) {
-			coordinate[i]=temp[i];
+			member[i]=temp[i];
 		}
 	}
 

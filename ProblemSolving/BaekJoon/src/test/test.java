@@ -1,108 +1,66 @@
 package test;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Arrays;
 
 public class test {
 	
-//	static int[] a = {2,5,3,7,8,4}; 
-	static int[] a = {3,7,5,4,2,8}; 
-	
-	
-	public static void main(String[] args) {
-		
-		heapsort();
-		
-		System.out.println(Arrays.toString(a));
-		
-	}
-	
-	public static void heapsort() {
-		int size = a.length;
- 
-		/*
-		 * 부모노드와 heaify과정에서 음수가 발생하면 잘못 된 참조가 발생하기 때문에
-		 * 원소가 1개이거나 0개일 경우는 정렬 할 필요가 없으므로 바로 함수를 종료한다.
-		 */
-		if(size < 2) {
-			return;
-		}
-		// 가장 마지막 노드의 부모 노드 인덱스 
-		int parentIdx = getParent(size - 1);
-		
-		// max heap 만들기
-		for(int i = parentIdx; i >= 0; i--) {
- 
-			// 부모노드(i값)을 1씩 줄이면서 heap 조건을 만족시키도록 재구성한다.
-			heapify( i, size - 1);
-		}
-		
-		
-		// 정렬하기
-		for (int i = size -1; i >0; i--) {
-			swap(0, i);
-			heapify(0, i-1);
-		}
- 
-	}
-	
 
-	// 부모 인덱스를 얻는 함수
-		private static int getParent(int child) {
-		    return (child - 1) / 2;
-		}
-	 
-		// 두 인덱스의 원소를 교환하는 함수
-		private static void swap(int i, int j) {
-			int temp = a[i];
-			a[i] = a[j];
-			a[j] = temp;
-		}
-		
-	 
-		// 힙을 만드는 함수
-		private static void heapify(int parentIdx, int lastIdx) {
-			
-			/*
-			 * 현재 트리에서 부모 노드의 자식노드 인덱스를 각각 구해준다.
-			 * 현재 부모 인덱스를 가장 큰 값을 갖고있다고 가정한다.
-			 */
-			int leftChildIdx = 2 * parentIdx + 1;
-			int rightChildIdx = 2 * parentIdx + 2;
-			int largestIdx = parentIdx;
-			
-			/*
-			 *  left child node와 비교
-			 *  
-			 *  자식노드 인덱스가 끝의 원소 인덱스를 넘어가지 않으면서
-			 *  현재 가장 큰 인덱스보다 왼쪽 자식노드의 값이 더 클경우
-			 *  가장 큰 인덱스를 가리키는 largestIdx를 왼쪽 자식노드인덱스로 바꿔준다.
-			 *  
-			 */
-			if(leftChildIdx < lastIdx && a[largestIdx] < a[leftChildIdx]) {
-				largestIdx = leftChildIdx;
-			}
-			
-			/*
-			 *  left right node와 비교
-			 *  
-			 *  자식노드 인덱스가 끝의 원소 인덱스를 넘어가지 않으면서
-			 *  현재 가장 큰 인덱스보다 오른쪽 자식노드의 값이 더 클경우
-			 *  가장 큰 인덱스를 가리키는 largestIdx를 오른쪽 자식노드인덱스로 바꿔준다.
-			 *  
-			 */
-			if(rightChildIdx < lastIdx && a[largestIdx] < a[rightChildIdx]) {
-				largestIdx = rightChildIdx;
-			}
-			
-			/*
-			 * largestIdx 와 부모노드가 같지 않다는 것은
-			 * 위 자식노드 비교 과정에서 현재 부모노드보다 큰 노드가 존재한다는 뜻이다.
-			 * 그럴 경우 해당 자식 노드와 부모노드를 교환해주고,
-			 * 교환 된 자식노드를 부모노드로 삼은 서브트리를 검사하도록 재귀 호출 한다.
-			 */
-			if(parentIdx != largestIdx) {
-				swap(largestIdx, parentIdx);
-				heapify(largestIdx, lastIdx);
-			}
-		}
+	   /* 안정 정렬 방법을 쓰면 될 듯??? 
+	    *  안정 정렬 = 삽입, 병합, 버블
+	    *  불안정 정렬 = 퀵, 선택
+	    * */
+	   
+	   public static void insertSort(String[][] arr) {
+	      
+	      for(int i = 1 ; i < arr.length ; i++) {
+	         String[] a = arr[i];
+	         int now = Integer.parseInt(arr[i][0]);
+	         int index = i-1;
+	         
+	         // index가 0이상이어야하는데 그건 안 써도 돼?
+	         
+	         //while(Integer.parseInt(arr[index][0]) > now && index >= 0) {
+	         while(index >= 0 &&Integer.parseInt(arr[index][0]) > Integer.parseInt(a[0])) {
+	            arr[index+1][0] = arr[index][0];
+	            arr[index+1][1] = arr[index][1];
+	            index--;
+	         }
+	         // while문을 나온 후에, 값 집어넣기
+	         arr[index+1] = a;
+	         
+	         
+	      }
+	      
+	   }
+	   
+	   public static void main(String[] args) throws Exception {
+
+	      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	      BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	      
+	      //map 길이
+	      int length = Integer.parseInt(br.readLine());
+	      
+	      String[][] arr = new String[length][2];
+	      
+	      for(int i = 0; i < length ; i++) {
+	         
+	         //이러면 바로 0과 1로 나눠지나?
+	         arr[i] = br.readLine().split(" ");
+	         
+	      }
+	      
+	      //삽입으로 풀어보자!
+	      insertSort(arr);
+	      
+	      for(int i = 0; i < length ; i++) {
+	         bw.write(arr[i][0]+" "+arr[i][1]+"\n");
+	      }
+	      bw.close();
+	   }
+
 }
