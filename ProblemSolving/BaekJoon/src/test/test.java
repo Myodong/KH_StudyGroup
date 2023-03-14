@@ -17,20 +17,20 @@ public class test {
 	   public static void insertSort(String[][] arr) {
 	      
 	      for(int i = 1 ; i < arr.length ; i++) {
-	         String[] a = arr[i];
-	         int now = Integer.parseInt(arr[i][0]);
-	         int index = i-1;
+	    	  
+	         String[] temp = arr[i];
 	         
-	         // index가 0이상이어야하는데 그건 안 써도 돼?
+	         int prev = i-1;
 	         
-	         //while(Integer.parseInt(arr[index][0]) > now && index >= 0) {
-	         while(index >= 0 &&Integer.parseInt(arr[index][0]) > Integer.parseInt(a[0])) {
-	            arr[index+1][0] = arr[index][0];
-	            arr[index+1][1] = arr[index][1];
-	            index--;
+	         
+	         while(prev >= 0 && Integer.parseInt(arr[prev][0]) > Integer.parseInt(temp[0])) {
+	        	 
+	            arr[prev+1][0] = arr[prev][0];
+	            arr[prev+1][1] = arr[prev][1];
+	            prev--;
 	         }
 	         // while문을 나온 후에, 값 집어넣기
-	         arr[index+1] = a;
+	         arr[prev+1] = temp;
 	         
 	         
 	      }

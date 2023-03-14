@@ -29,6 +29,7 @@ public class B10814 {
 			member[i][1] = xyNum[1];
 		}
 
+		temp = new String[member.length][2];
 		// 병합정렬 Top-Down
 		mergeSort(0, member.length - 1);
 
@@ -42,8 +43,6 @@ public class B10814 {
 	}
 
 	private static void mergeSort(int left, int right) {
-		temp = new String[member.length][2];
-
 		// 원소가 1개 일시 실행 안함
 		if (left == right) {
 			return;
