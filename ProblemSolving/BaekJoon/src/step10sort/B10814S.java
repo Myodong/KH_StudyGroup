@@ -60,9 +60,6 @@ public class B10814S {
 
 	}
 
-	/*##############
-	실패한 부분
-	 ##############*/
 	private static void merge(int left, int mid, int right) {
 		int mergeLeft = left; 
 		int mergeRight = mid+1; 
@@ -71,14 +68,12 @@ public class B10814S {
 		while (mergeLeft<=mid  && mergeRight<=right) {
 			
 			if (Integer.parseInt(member[mergeLeft][0])<=Integer.parseInt(member[mergeRight][0])) {
-				temp[idx][0] = member[mergeLeft][0];
-				temp[idx][1] = member[mergeLeft][1];
+				temp[idx] = member[mergeLeft];
 				mergeLeft++;
 				idx++;
 				
 			} else  {
-				temp[idx][0] = member[mergeRight][0];
-				temp[idx][1] = member[mergeRight][1];
+				temp[idx] = member[mergeRight];
 				mergeRight++;
 				idx++;
 			}
@@ -86,39 +81,19 @@ public class B10814S {
 		
 		if (mergeLeft>mid) {
 			while (mergeRight<=right) {
-				temp[idx][0] = member[mergeRight][0];
-				temp[idx][1] = member[mergeRight][1];
+				temp[idx]=member[mergeRight];
 				idx++;
 				mergeRight++;
 			}
 		}else {
 			while (mergeLeft<=mid) {
-				temp[idx][0] = member[mergeLeft][0];
-				temp[idx][1] = member[mergeLeft][1];
+				temp[idx]=member[mergeLeft];
 				idx++;
 				mergeLeft++;
 			}
 		}
-		/*
-		 문제 코드!!
-		 이유 위 코드에서 
-			temp[idx][0] = member[mergeLeft][0];
-			temp[idx][1] = member[mergeLeft][1];
-			이런식으로 원소르 넣었기 때문에 
-			주소값을 기준으로 정렬할거면 일관성 있게 주소값으로 정렬하고
-			원소값을 기준으로 정렬할거면 일관성 있게 원소값으로 정렬해야하지만
-			
-			위에서는 원소 정렬 쓰다 주소값을 사용해서 이상하게 됨
-				member[i]=temp[i];
-			
-		 * */
 		for (int i = left; i <= right; i++) {
 			member[i]=temp[i];
-			
-			/* 아래와 같이 써야 실행됨
-			member[i][0]=temp[i][0];
-			member[i][1]=temp[i][1];
-			*/
 		}
 	}
 
