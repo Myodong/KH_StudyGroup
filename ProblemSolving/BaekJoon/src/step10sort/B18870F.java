@@ -1,15 +1,13 @@
-package test;
+package step10sort;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class test {
+public class B18870F {
 	
-
 	public static void main(String[] args) throws Exception {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -32,7 +30,6 @@ public class test {
 		
 		StringTokenizer st = new StringTokenizer(br.readLine()," ");
 		
-		
 		for(int i = 0; i < inputN; i++) {
 			// 원소 입력받기
 			coordinate[i] =Integer.parseInt(st.nextToken());
@@ -44,22 +41,21 @@ public class test {
 			//원소 비교
 			for (int j = 0; j < inputN; j++) {
 				
-				if (coordinate[i]>=coordinate[j]&&coordinate[i]!=coordinate[j]) {
+				if (coordinate[i]>coordinate[j]&&coordinate[i]!=coordinate[j]) {
 					count++;
 				}
 			}
-			coordinate[i]=count;
+			// 누적값 넣기
+			arr[i]=count;
+			// 카운트 초기화
 			count=0;
 		}
 		
 		// BufferedWriter에 출력 문 담기
 		for (int i = 0; i < inputN; i++) {
-			bw.write(coordinate[i] + " ");
+			bw.write(arr[i] + " ");
 		}
 		// 출력 후 스트림 닫기
 		bw.close();
-		
 	}
-
-
 }
