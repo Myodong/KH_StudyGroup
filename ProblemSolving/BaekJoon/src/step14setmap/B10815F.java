@@ -46,23 +46,13 @@ public class B10815F {
 		
 		StringTokenizer st1 = new StringTokenizer(br.readLine()," ");
 
-		// 원소 입력받기
+		// 원소 입력 받고 BufferedWriter에 출력 문 담기
 		for (int i = 0; i < inputM; i++) {
 			numM[i]=Integer.parseInt(st1.nextToken());
-		}
-		
-		
-		
-
-		// BufferedWriter에 출력 문 담기
-		for (int i = 0; i < inputM; i++) {
-	        map1.getOrDefault(numM[i], 0);
-
-			bw.write(map1.get(numM[i]) + " ");
+			bw.write(map1.getOrDefault(numM[i],0) + " ");
 		}
 		// 출력 후 스트림 닫기
 		bw.close();
-		
 	}
 
 
