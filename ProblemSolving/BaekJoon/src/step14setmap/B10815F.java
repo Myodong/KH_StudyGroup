@@ -13,13 +13,16 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-public class B10815 {
+public class B10815F {
 
 	public static void main(String[] args) throws Exception {
 		
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
+        
+		// map 선언
+        Map<Integer, Integer> map1 =new HashMap<Integer, Integer>();
+        
 		// 입력 받을 원소 갯수 인덱스 길이 N 입력 받기
 		int inputN = Integer.parseInt(br.readLine());
 		
@@ -29,11 +32,14 @@ public class B10815 {
 
 		// 원소 입력받기
 		for (int i = 0; i < inputN; i++) {
-			listN.add(Integer.parseInt(st.nextToken()));
+			int input =Integer.parseInt(st.nextToken());
+			listN.add(input);
+			map1.put(input, 1);
 		}
 		
+///////////////////////////////////////////////////////////////////////////////		
 		
-		// 입력 받을 원소 갯수 인덱스 길이 N 입력 받기
+		// 입력 받을 원소 갯수 인덱스 길이 M 입력 받기
 		int inputM = Integer.parseInt(br.readLine());
 		
 		Integer[] numM = new Integer[inputM];
@@ -45,37 +51,19 @@ public class B10815 {
 			numM[i]=Integer.parseInt(st1.nextToken());
 		}
 		
-		// 배열 set 변경
-        Set<Integer> common = new HashSet<Integer>(Arrays.asList(numM));
-        Set<Integer> common1 = new HashSet<Integer>(Arrays.asList(numM));
-
-        // 교집합 구하기
-        common.retainAll(listN);
-
-        
-        // map 선언
-        Map<Integer, Integer> map1 =new HashMap<Integer, Integer>();
-        
-        // 교집합 맵에 넣기
-       for (Integer integer : common) {
-   		map1.put(integer, 1);
-	}
-       
-       // 차집합 구하기
-       common1.removeAll(listN);
-       for (Integer integer : common1) {
-   		map1.put(integer, 0);
-	}
-       
+		
+		
 
 		// BufferedWriter에 출력 문 담기
 		for (int i = 0; i < inputM; i++) {
-			
+	        map1.getOrDefault(numM[i], 0);
+
 			bw.write(map1.get(numM[i]) + " ");
 		}
 		// 출력 후 스트림 닫기
 		bw.close();
 		
 	}
+
 
 }
