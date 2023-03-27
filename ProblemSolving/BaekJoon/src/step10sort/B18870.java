@@ -46,13 +46,15 @@ public class B18870 {
 		// map 중복 제거 (key, value 이용 하기)
 		Map<Integer,Integer> coordinateMap = new HashMap<Integer,Integer>();
 		
+		// map value 값 선언
 		int value=0;
 		
 		for (int i = 0; i < coordinate.length; i++) {
 	
+			// 0번인덱스 이전 비교 할거 없으니 map에 값 넣기
 			if (i==0) {
 				coordinateMap.put(coordinate[i], value++);
-			} else {
+			} else { // 이전 배열 값과 같지 않다면 map에 넣기
 				if (coordinate[i]!=coordinate[i-1]) {
 					coordinateMap.put(coordinate[i], value++);
 				}
