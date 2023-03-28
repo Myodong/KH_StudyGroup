@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-public class B10815 {
+public class B10815S_2 {
 
 	public static void main(String[] args) throws Exception {
 
@@ -35,12 +35,6 @@ public class B10815 {
 		// 정렬하기
 		Arrays.sort(cards);
 		
-		
-		System.out.println("\n"+"------------");
-		System.out.println(Arrays.toString(cards));
-		System.out.println("------------");
-		
-
 		// 카드 개수 M 입력 받기
 		int inputM = Integer.parseInt(br.readLine());
 
