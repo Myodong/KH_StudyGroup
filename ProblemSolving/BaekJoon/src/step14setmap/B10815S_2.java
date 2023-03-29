@@ -53,21 +53,21 @@ public class B10815S_2 {
 
 	//이분탐색(이진탐색)
 	public static int binarySearch(int[] cards, int N, int search) {
-		int first = 0;
-		int last = N - 1;
+		int left  = 0;
+		int right  = N - 1;
 		int mid = 0;
 
-		while (first <= last) {
-			mid = (first + last) / 2; // 중간 인덱스
+		while (left  <= right ) {
+			mid = (left  + right ) / 2; // 중간 인덱스
 
 			if (cards[mid] == search) { // 중간값과 찾으려는 수가 같은 경우
 				return 1;
 			}
 
 			if (cards[mid] < search) { // 중간값이 찾으려는 수보다 작으면, 그 이하로는 볼 필요 없음.
-				first = mid + 1;
+				left  = mid + 1;
 			} else { // 중간값이 찾으려는 수보다 크면, 그 이상으로는 볼 필요 없음.
-				last = mid - 1;
+				right  = mid - 1;
 			}
 		}
 		return 0;
