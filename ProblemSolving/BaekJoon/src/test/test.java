@@ -5,61 +5,73 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 public class test {
-	
 
-	public static void main(String[] args) throws Exception {
+	static class TrieNode {
+		Map<Character, TrieNode> childNode = new HashMap<>();
+		boolean terminal;
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
-		// 입력배열
-		int coordinate[];
-		
-		// 카운트
-		int count = 0;
-		// 출력배열
-		int arr[];
-		
-		// 입력 받을 원소 갯수 인덱스 길이 N 입력 받기
-		int inputN = Integer.parseInt(br.readLine());
-		
-		// 배열 크기할당
-		coordinate = new int[inputN];
-		arr= new int [inputN];
-		
-		StringTokenizer st = new StringTokenizer(br.readLine()," ");
-		
-		
-		for(int i = 0; i < inputN; i++) {
-			// 원소 입력받기
-			coordinate[i] =Integer.parseInt(st.nextToken());
+		TrieNode() {
+			/* no-op */
 		}
-		
-		// 비교할 원소
-		for (int i = 0; i < inputN; i++) {
-			
-			//원소 비교
-			for (int j = 0; j < inputN; j++) {
-				
-				if (coordinate[i]>=coordinate[j]&&coordinate[i]!=coordinate[j]) {
-					count++;
+
+		public void insert(String word) {
+			TrieNode trieNode = this;
+			for (int i = 0; i < word.length(); i++) {
+				char c = word.charAt(i);
+
+				// tmp childNode에 c없으면 추가
+				trieNode.childNode.putIfAbsent(c, new TrieNode());
+				trieNode = trieNode.childNode.get(c);
+
+				// 마지막 문자 terminal
+				if (i == word.length() - 1) {
+					trieNode.terminal = true;
+					return;
 				}
 			}
-			coordinate[i]=count;
-			count=0;
 		}
-		
-		// BufferedWriter에 출력 문 담기
-		for (int i = 0; i < inputN; i++) {
-			bw.write(coordinate[i] + " ");
+
+		public boolean contains(String word) {
+			TrieNode trieNode = this;
+			for (int i = 0; i < word.length(); i++) {
+				char c = word.charAt(i);
+				TrieNode node = trieNode.childNode.get(c);
+
+				if (node == null) {
+					return false; // 다음 문자가 없으면 false
+				}
+				trieNode = node;
+			}
+			// 해당 단어로 종료하는 문자가 있는 경우 false
+			return trieNode.terminal;
 		}
-		// 출력 후 스트림 닫기
-		bw.close();
-		
 	}
 
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+
+		int n = Integer.parseInt(st.nextToken());
+		int m = Integer.parseInt(st.nextToken());
+		TrieNode tNode = new TrieNode();
+		for (int i = 0; i < n; i++) {
+			String in = br.readLine();
+			tNode.insert(in);
+		}
+
+		int cnt = 0;
+		for (int i = 0; i < m; i++) {
+			String str = br.readLine();
+			if (tNode.contains(str)) {
+				cnt++;
+			}
+		}
+		System.out.println(cnt);
+	}
 
 }
