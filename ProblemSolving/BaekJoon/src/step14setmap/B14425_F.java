@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-public class B14425F {
+public class B14425_F {
 
 	public static void main(String[] args) throws Exception {
 

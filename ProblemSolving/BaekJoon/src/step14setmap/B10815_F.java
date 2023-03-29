@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-public class B10815F {
+public class B10815_F {
 
 	public static void main(String[] args) throws Exception {
 		

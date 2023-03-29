@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-public class B10815S_2 {
+public class B10815_S2 {
 
 	public static void main(String[] args) throws Exception {
 
@@ -52,9 +52,9 @@ public class B10815S_2 {
 	}
 
 	//이분탐색(이진탐색)
-	public static int binarySearch(int[] cards, int N, int search) {
+	public static int binarySearch(int[] cards, int inputN, int search) {
 		int left  = 0;
-		int right  = N - 1;
+		int right  = inputN - 1;
 		int mid = 0;
 
 		while (left  <= right ) {

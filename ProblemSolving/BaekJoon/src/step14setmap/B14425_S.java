@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-public class B14425S {
+public class B14425_S {
 	public static void main(String[] args) throws Exception {
 
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
