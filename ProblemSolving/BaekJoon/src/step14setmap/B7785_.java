@@ -22,10 +22,9 @@ public class B7785_ {
 		
 		// 출입 로그 입력 받기
 		for (int i = 0; i < N; i++) {
-			
+		    String[] inputLog = br.readLine().split(" "); // 입력받은 값을 공백으로 분리하여 배열에 저장
+		    logList.put(inputLog[0], inputLog[1]);  // Key , Value로 값을 저장
 		}
-		
-		// 2차원 배열
 		
 		//정렬
 		
