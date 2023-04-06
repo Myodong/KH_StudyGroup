@@ -32,7 +32,9 @@ public class B7785_S {
 		}
 
 		List<String> sortListName = new ArrayList<>(setLog);
-		Collections.sort(sortListName, Collections.reverseOrder()); // 사전 역순으로 정렬
+
+		// 문자열 사전 역순으로 정렬
+		Collections.sort(sortListName, Collections.reverseOrder()); 
 
         // 퇴근안한 사람 사전 역순 출력
 		for (String name : sortListName) {

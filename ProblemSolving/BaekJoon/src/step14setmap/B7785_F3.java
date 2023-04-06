@@ -30,8 +30,8 @@ public class B7785_F3 {
 				listLog.remove(inputLog[0]); // 퇴근 기록이면 List에서 제거
 			}
 		}
-
-		Collections.sort(listLog, Collections.reverseOrder()); // 사전 역순으로 정렬
+		// 문자열 사전 역순으로 정렬
+		Collections.sort(listLog, Collections.reverseOrder()); 
 
         // 퇴근안한 사람 사전 역순 출력
 		for (String name : listLog) {
