@@ -33,6 +33,7 @@ public class B7785_ {
 		}
 		
         // 퇴근안한 사람 출력
+		// keySet() 을 이용 하여 Map에서 전체 출력하지만 key값만 출력
 		for (String key : logList.keySet()) {
 		    bw.write(key + "\n");
 		}
