@@ -15,13 +15,13 @@ public class B7785_F {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
 		// 출입기록 수 N
-		int N = Integer.parseInt(br.readLine());
+		int n = Integer.parseInt(br.readLine());
 		
 		
 		Map<String, String> logList = new HashMap<String, String>();
 		
 		// 출입 로그 입력 받기
-		for (int i = 0; i < N; i++) {
+		for (int i = 0; i < n; i++) {
 		    String[] inputLog = br.readLine().split(" "); // 입력받은 값을 공백으로 분리하여 배열에 저장
 		    
 		    if (!logList.containsKey(inputLog[0])) { // logList(Map)에 해당 key가 없다면

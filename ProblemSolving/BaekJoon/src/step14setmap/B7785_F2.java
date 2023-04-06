@@ -18,12 +18,12 @@ public class B7785_F2 {
 	    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 	    // 출입기록 수 N
-	    int N = Integer.parseInt(br.readLine());
+	    int n = Integer.parseInt(br.readLine());
 
 	    Set<String> setLog = new HashSet<String>();
 
 	    // 출입 로그 입력 받기
-	    for (int i = 0; i < N; i++) {
+	    for (int i = 0; i < n; i++) {
 	        String[] inputLog = br.readLine().split(" "); // 입력받은 값을 공백으로 분리하여 배열에 저장
 
 	        if (inputLog[1].equals("enter")) { // 입력받은 배열 inputLog[1] 값이 출근 "enter" 같다면 

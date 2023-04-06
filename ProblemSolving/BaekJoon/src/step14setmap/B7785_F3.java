@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class B7785_ {
+public class B7785_F3 {
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -18,24 +18,23 @@ public class B7785_ {
 
 		int n = Integer.parseInt(br.readLine()); // 출입 기록 수
 
-		Set<String> setLog = new HashSet<String>(); // 출입 기록 저장용 Set
+		List<String> listLog = new ArrayList<String>(); // 출입 기록 저장용 List
 
 		// 출입 로그 입력 받기
 		for (int i = 0; i < n; i++) {
 			String[] inputLog = br.readLine().split(" ");
 
 			if (inputLog[1].equals("enter")) {
-				setLog.add(inputLog[0]); // 출근 기록이면 Set에 추가
+				listLog.add(inputLog[0]); // 출근 기록이면 List에 추가
 			} else {
-				setLog.remove(inputLog[0]); // 퇴근 기록이면 Set에서 제거
+				listLog.remove(inputLog[0]); // 퇴근 기록이면 List에서 제거
 			}
 		}
 
-		List<String> names = new ArrayList<>(setLog);
-		Collections.sort(names, Collections.reverseOrder()); // 사전 역순으로 정렬
+		Collections.sort(listLog, Collections.reverseOrder()); // 사전 역순으로 정렬
 
-		// 사전 역순으로 출력
-		for (String name : names) {
+        // 퇴근안한 사람 사전 역순 출력
+		for (String name : listLog) {
 			bw.write(name + "\n");
 		}
 
