@@ -30,15 +30,14 @@ public class B7785_ {
 			}else {
 				logList.remove(inputLog[0]);// logList(Map)에 해당 key가 있다면 기존 키 제거(출근 후 퇴근 했기때문)
 			}
-		    
 		}
 		
-		System.out.println("---"); // 경계선
-		
-		for(String key : logList.keySet()) {
-            String value = (String) logList.get(key);
-            System.out.println(key + " : " + value);
-        }
+        // 퇴근안한 사람 출력
+		for (String key : logList.keySet()) {
+		    bw.write(key + "\n");
+		}
+	    bw.close();
+	    br.close();
 		
 	}
 }
