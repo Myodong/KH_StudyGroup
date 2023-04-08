@@ -8,98 +8,30 @@ import java.util.Arrays;
 
 public class Test3 {
 
-		// 멤버 변수 선언
-		public static String member[][];
-		public static String temp [][];
 
-		public static void main(String[] args) throws Exception {
+	public static void main (String[] areg) {
+		
+		//배열 선언 및 초기화
+		int arr[] = { 2, 5, 1, 3, 0, 4 };
 
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
-			// 입력 받을 원소 갯수 인덱스 길이 N 입력 받기
-			int inputN = Integer.parseInt(br.readLine());
-
-			// 2차원 배열 입력받은 인덱스 길이로 초기화
-			member = new String[inputN][2];
-
-			// 2차원 배열에 원소 입력 받기
-			for (int i = 0; i < inputN; i++) {
-				String[] xyNum = br.readLine().split(" ");
-				member[i][0] = xyNum[0];
-				member[i][1] = xyNum[1];
-			}
-
-			temp = new String[member.length][2];
-			// 병합정렬 Top-Down
-			mergeSort(0, member.length - 1);
-
-			// BufferedWriter에 출력 문 담기
-			for (int i = 0; i < inputN; i++) {
-				bw.write(member[i][0] + " " + member[i][1] + "\n");
-			}
-			// 출력 후 스트림 닫기
-			bw.close();
-
-		}
-
-		private static void mergeSort(int left, int right) {
-			// 원소가 1개 일시 실행 안함
-			if (left == right) {
-				return;
-			}
-
-			// 가운대 위치
-			int mid = (left + right) / 2;
-
-			// 절반 중 왼쪽 부분리스트(left ~ mid)
-			mergeSort(left, mid);
-			// 절반 중 오른쪽 부분리스트(mid+1 ~ right)
-			mergeSort(mid + 1, right);
-			// 병합작업
-			merge(left, mid, right);
-
-		}
-
-		private static void merge(int left, int mid, int right) {
-			int mergeLeft = left; 
-			int mergeRight = mid+1; 
-			int idx = left; 
-			
-			while (mergeLeft<=mid  && mergeRight<=right) {
-				
-				if (Integer.parseInt(member[mergeLeft][0])<=Integer.parseInt(member[mergeRight][0])) {
-					temp[idx][0] = member[mergeLeft][0];
-					temp[idx][1] = member[mergeLeft][1];
-					mergeLeft++;
-					idx++;
-					
-				} else  {
-					temp[idx][0] = member[mergeRight][0];
-					temp[idx][1] = member[mergeRight][1];
-					mergeRight++;
-					idx++;
+		int indexMin, temp;
+		
+		for (int i = 0; i < arr.length - 1; i++) { // 1.
+			indexMin = i;
+			for (int j = i + 1; j < arr.length; j++) { // 2.
+				if (arr[j] < arr[indexMin]) { // 3.
+					indexMin = j;
 				}
 			}
-			
-			if (mergeLeft>mid) {
-				while (mergeRight<=right) {
-					temp[idx][0] = member[mergeRight][0];
-					temp[idx][1] = member[mergeRight][1];
-					idx++;
-					mergeRight++;
-				}
-			}else {
-				while (mergeLeft<=mid) {
-					temp[idx][0] = member[mergeLeft][0];
-					temp[idx][1] = member[mergeLeft][1];
-					idx++;
-					mergeLeft++;
-				}
-			}
-			for (int i = left; i <= right; i++) {
-				member[i]=temp[i];
-			}
+			// 4. swap(arr[indexMin], arr[i])
+			// 찾은 값 임시저장 변수 넣어주기
+			temp = arr[indexMin];
+			// 처음 선택된 위치 값 위치 변경
+			arr[indexMin] = arr[i];
+			// 임시저장 변수에 넣은 값 위치 변경
+			arr[i] = temp;
 		}
-
+		System.out.println(Arrays.toString(arr));
+		
+	}
 }
