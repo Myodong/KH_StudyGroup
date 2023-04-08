@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
 
-public class test3 {
+public class Test3 {
 
 		// 멤버 변수 선언
 		public static String member[][];
