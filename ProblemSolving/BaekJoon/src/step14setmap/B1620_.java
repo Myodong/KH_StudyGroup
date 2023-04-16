@@ -54,19 +54,20 @@ public class B1620_ {
 
 			if (nameMap.containsKey(problem)) {
 				bw.write(nameMap.get(problem));
-				
+                bw.newLine();
 			} else {
-				if (nameMap.containsValue(problem)) {
-					for (String key : nameMap.keySet()) {
-						if (nameMap.get(key).equals(problem)) {
-							bw.write(key);
-						}
-					}
-				}
-			}
+				// value 값을 이용 해서 key 출력 해야함
+			       for (Map.Entry<String, String> entry : nameMap.entrySet()) {
+	                    if (entry.getValue().equals(problem)) {
+	                        bw.write(entry.getKey());
+	                        bw.newLine();
+	                    }
+	                }
+	            }
+	        }
 
-			bw.close();
-			br.close();
-		}
+	        bw.flush();
+	        bw.close();
+	        br.close();
+	    }
 	}
-}
