@@ -41,22 +41,17 @@ public class B1620_ {
 			nameMap.put(br.readLine(), Integer.toString(num++));
 		}
 
-		System.out.println("\n" + "----------");
-		// Map key, value 확인하기
-//		Set<String> keySet = nameMap.keySet();
-//		for (String key : keySet) {	
-//			System.out.println(key + " : " + nameMap.get(key));	
-//		}
 
 		// 문제 입력 및 답출력
 		for (int i = 0; i < problemM; i++) {
 			String problem = br.readLine();
 
+			// Map에서 key값이 있는지 확인
 			if (nameMap.containsKey(problem)) {
 				bw.write(nameMap.get(problem));
                 bw.newLine();
 			} else {
-				// value 값을 이용 해서 key 출력 해야함
+				// Map에서 value값이 있는지 확인
 			       for (Map.Entry<String, String> entry : nameMap.entrySet()) {
 	                    if (entry.getValue().equals(problem)) {
 	                        bw.write(entry.getKey());
