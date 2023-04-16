@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-public class B1620_ {
+public class B1620_S {
 
 	public static void main(String[] arge) throws Exception {
 
