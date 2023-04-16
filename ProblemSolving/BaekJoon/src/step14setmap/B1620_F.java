@@ -8,7 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-public class B1620_ {
+// 시간 초과
+public class B1620_F {
 
 	public static void main(String[] arge) throws Exception {
 
@@ -32,31 +33,33 @@ public class B1620_ {
 		// M 개의 문제 입력 포켓몬 이름 일시 번호출력
 		// 번호일 시 이름 출력
 
-		Map<String, Integer> nameMap = new HashMap<>();
-		Map<Integer, String> numMap = new HashMap<>();
+		Map<String, String> nameMap = new HashMap<>();
 
+		// 포켓몬 번호
+		int num = 1;
 		// 포켓몬 이름 Key, 번호 value 입력받기
-		for (int i = 1; i <= nameN; i++) {
-			String  input = br.readLine();
-			nameMap.put(input, i);
-			numMap.put(i, input);
+		for (int i = 0; i < nameN; i++) {
+			nameMap.put(br.readLine(), Integer.toString(num++));
 		}
+
 
 		// 문제 입력 및 답출력
 		for (int i = 0; i < problemM; i++) {
-			//문제 입력 받기
 			String problem = br.readLine();
 
-			// problem 문자열 일때
+			// Map에서 key값이 있는지 확인
 			if (nameMap.containsKey(problem)) {
-				// 번호 출력
-				bw.write(nameMap.get(problem).toString());
-				
-			} else { // problem 숫자 일때
-				// 이름 출력
-                bw.write(numMap.get(Integer.parseInt(problem)));
+				bw.write(nameMap.get(problem));
+                bw.newLine();
+			} else {
+				// Map에서 value값이 있는지 확인
+			       for (Map.Entry<String, String> entry : nameMap.entrySet()) {
+	                    if (entry.getValue().equals(problem)) {
+	                        bw.write(entry.getKey());
+	                        bw.newLine();
+	                    }
+	                }
 	            }
-			bw.newLine();
 	        }
 	        bw.close();
 	        br.close();
