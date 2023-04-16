@@ -60,8 +60,6 @@ public class B1620_ {
 	                }
 	            }
 	        }
-
-	        bw.flush();
 	        bw.close();
 	        br.close();
 	    }
