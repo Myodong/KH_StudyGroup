@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.StringTokenizer;
 
 public class B1620_ {
@@ -33,29 +32,41 @@ public class B1620_ {
 		// M 개의 문제 입력 포켓몬 이름 일시 번호출력
 		// 번호일 시 이름 출력
 
-		Map<String, Integer> nameMap = new HashMap<>();
+		Map<String, String> nameMap = new HashMap<>();
 
 		// 포켓몬 번호
 		int num = 1;
 		// 포켓몬 이름 Key, 번호 value 입력받기
 		for (int i = 0; i < nameN; i++) {
-			nameMap.put(br.readLine(), num++);
+			nameMap.put(br.readLine(), Integer.toString(num++));
 		}
 
-		
-		System.out.println("----------");
-		// 문제 입력 및 답출력
-		Set<String> keySet = nameMap.keySet();
-		for (String key : keySet) {	
-			System.out.println(key + " : " + nameMap.get(key));	
-		}
-//		for (String key : nameMap.keySet()) {
-//
-//			if (nameMap.get(key).equals(br.readLine())) {
-//				System.out.println("====");
-//				System.out.println(nameMap.get(key));
-//			}
-//
+		System.out.println("\n" + "----------");
+		// Map key, value 확인하기
+//		Set<String> keySet = nameMap.keySet();
+//		for (String key : keySet) {	
+//			System.out.println(key + " : " + nameMap.get(key));	
 //		}
+
+		// 문제 입력 및 답출력
+		for (int i = 0; i < problemM; i++) {
+			String problem = br.readLine();
+
+			if (nameMap.containsKey(problem)) {
+				bw.write(nameMap.get(problem));
+				
+			} else {
+				if (nameMap.containsValue(problem)) {
+					for (String key : nameMap.keySet()) {
+						if (nameMap.get(key).equals(problem)) {
+							bw.write(key);
+						}
+					}
+				}
+			}
+
+			bw.close();
+			br.close();
+		}
 	}
 }
