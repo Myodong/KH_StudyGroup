@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class B1620_ {
@@ -31,26 +32,30 @@ public class B1620_ {
 
 		// M 개의 문제 입력 포켓몬 이름 일시 번호출력
 		// 번호일 시 이름 출력
-		
+
 		Map<String, Integer> nameMap = new HashMap<>();
-	
-		// 포켓몬 번호 
+
+		// 포켓몬 번호
 		int num = 1;
 		// 포켓몬 이름 Key, 번호 value 입력받기
 		for (int i = 0; i < nameN; i++) {
 			nameMap.put(br.readLine(), num++);
 		}
-		
-		
-		// 문제 입력 및 답출력
-		for (String key : nameMap.keySet()) {
-			
-			if (nameMap.get(key).equals(br.readLine())) {
-				System.out.println(nameMap.get(key));
-			
-			
-		}
-		
 
+		
+		System.out.println("----------");
+		// 문제 입력 및 답출력
+		Set<String> keySet = nameMap.keySet();
+		for (String key : keySet) {	
+			System.out.println(key + " : " + nameMap.get(key));	
+		}
+//		for (String key : nameMap.keySet()) {
+//
+//			if (nameMap.get(key).equals(br.readLine())) {
+//				System.out.println("====");
+//				System.out.println(nameMap.get(key));
+//			}
+//
+//		}
 	}
 }
