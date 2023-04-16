@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+// 시간 초과
 public class B1620_ {
 
 	public static void main(String[] arge) throws Exception {
