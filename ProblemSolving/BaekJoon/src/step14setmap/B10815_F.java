@@ -28,7 +28,7 @@ public class B10815_F {
 		StringTokenizer st = new StringTokenizer(br.readLine()," ");
 
 		// 원소 입력받기
-		for (int i = 0; i < inputN; i++) {
+		for (int i = 0; i < inputN; i++) {  
 			listN.add(Integer.parseInt(st.nextToken()));
 		}
 		
