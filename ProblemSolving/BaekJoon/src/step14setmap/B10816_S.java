@@ -7,7 +7,7 @@ import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class B10816_ {
+public class B10816_S {
 
     public static void main (String[] args) throws Exception{
 
@@ -39,7 +39,7 @@ public class B10816_ {
             int search = Integer.parseInt(st.nextToken());
             int rightSearch = rightSearch(numN, search);// 중복 값중 제일 큰 인덱스
             int leftSearch  = leftSearch(numN, search);// 중복 값중 제일 작은 인덱스
-            int reslut = leftSearch-rightSearch; // 큰값 작은값의 차이가 중복 갯수
+            int reslut = rightSearch-leftSearch; // 큰값 작은값의 차이가 중복 갯수
             bw.write(reslut+ " ");
         }
 
