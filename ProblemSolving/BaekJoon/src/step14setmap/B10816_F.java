@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class B10816_ {
+public class B10816_F {
 
     public static void main (String[] args) throws Exception{
 
