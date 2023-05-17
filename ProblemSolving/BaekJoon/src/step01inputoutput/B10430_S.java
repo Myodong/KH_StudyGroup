@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
-public class B10430_ {
+public class B10430_S {
 
 	public static void main(String[] args) throws Exception {
 
