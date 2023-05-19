@@ -22,7 +22,6 @@ public class B10430_S {
 		for(int i=0; i<arr.length; i++) {
 			arr[i]=Integer.parseInt(st.nextToken());
 		}
-		
 		bw.write((arr[0]+arr[1])%arr[2]+"\n"+((arr[0]%arr[2])+(arr[1]%arr[2]))%arr[2]+"\n"+(arr[0]*arr[1])%arr[2]+"\n"+ ((arr[0]%arr[2])*(arr[1]%arr[2]))%arr[2]);
 		bw.close();
 		br.close();
