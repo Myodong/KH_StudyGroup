@@ -20,10 +20,11 @@ public class B1764_S {
         int m = Integer.parseInt(st.nextToken());
 
 
-        Set<String> nName = new HashSet<String>(); // n이름 저장
+        Set<String> nName = new HashSet<String>(); // n이름 저장할 Set
 
         //n 이름 입력받기
         for (int i=0; i<n; i++){
+            // Set에 담기
             nName.add(br.readLine());
         }
 
@@ -44,7 +45,6 @@ public class B1764_S {
 
         // 문자열 사전순 정렬
         Collections.sort(sortListName);
-
         for (String i : sortListName){
             bw.write(i+"\n");
         }
