@@ -30,20 +30,20 @@ public class B1269_S {
         }
 
         st = new StringTokenizer(br.readLine(), " ");
+
         Set<String> setB = new HashSet<>();
         // B입력 받으면서 A에서 중복값 카운트
         for (int i=0; i<inputB;i++){
-            String listb =st.nextToken();
-            setB.add(listb);
+            String numB =st.nextToken();
+            setB.add(numB);
             // listA에서 listB와 중복된 갯구 하기
-            if (setA.contains(listb)){
+            if (setA.contains(numB)){
                 // 중복갯수 카운트
                 count++;
             }
         }
 
         bw.write((inputA-count)+(inputB-count)+"");
-
         bw.close();
         br.close();
 
