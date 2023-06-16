@@ -4,11 +4,9 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
-public class B1269_ {
+public class B1269_S {
 
     public static void main(String[] arge) throws Exception{
 
@@ -18,22 +16,34 @@ public class B1269_ {
 
         st = new StringTokenizer(br.readLine(), " ");
 
+        // 변수 선언
         int inputA = Integer.parseInt(st.nextToken());
         int inputB = Integer.parseInt(st.nextToken());
         int count =0;
 
         st = new StringTokenizer(br.readLine(), " ");
 
-        //  1. A에서 B와 중복인거 제거 남은 갯수
-        List<String> listA = new ArrayList<>();
-        // 입력 받기
+        Set<String> setA = new HashSet<>();
+        // A 값 입력 받아 Set 넣어주기
         for (int i=0; i<inputA;i++){
-            listA.add(st.nextToken());
+            setA.add(st.nextToken());
         }
 
-        System.out.println(listA);
+        st = new StringTokenizer(br.readLine(), " ");
+        Set<String> setB = new HashSet<>();
+        // B입력 받으면서 A에서 중복값 카운트
+        for (int i=0; i<inputB;i++){
+            String listb =st.nextToken();
+            setB.add(listb);
+            // listA에서 listB와 중복된 갯구 하기
+            if (setA.contains(listb)){
+                // 중복갯수 카운트
+                count++;
+            }
+        }
 
-        // 2. B에서 A와 중복인거 제거 남은 갯수
+        bw.write((inputA-count)+(inputB-count)+"");
+
         bw.close();
         br.close();
 
