@@ -5,49 +5,42 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Test4 {
-		
-	    int top;
-	    int size;
-	    int [] stack;
+		public static void main(String[] args)  {
+			Scanner sc = new Scanner(System.in);
 
-	    public void UserArrayStack(int size) {
-	        this.size = size; //
-	        stack = new int[size];
-	        top = -1; // top 의 값 초기화
-	    }
+			System.out.print("정수 입력 : ");
+			int input = sc.nextInt();
 
-	    private void push(int item) {
-	        stack[++top] = item;
-	        System.out.println(stack[top] + " push!");
-	    }
+			for(int row = 1 ; row <= input ; row++ ) {
 
-	    private void peek() {
-	        System.out.println(stack[top] + " peek!");
-	    }
+				// for문을 이용한 풀이
+//			for(int i = input-row ; i >= 1 ; i--) {
 
-	    private void pop() {
-	        System.out.println(stack[top] + " pop!");
-	        stack[top--] = 0;
-	    }
+			for(int i = input-1 ; i >= row ; i--) {
+				System.out.print(" ");
+			}
 
-	    private int search(int item) {
-	        for (int i = 0; i <= top; i++) { // for 문은 top 만큼
-	            if (stack[i] == item)
-	                return (top - i) + 1; // top - 탐색한 배열의 인덱스, 배열 이므로 +1 추가
-	        }
-	        return -1;
-	    }
+			for(int col = 1 ; col <= row * 2 - 1 ; col++) {
+				System.out.print("*");
+			}
 
-	    private boolean empty() {
-	        return size == 0;
-	    }
-	    
-	    private boolean contains(int item) {
-	        for(int s : stack) {
-	            if(s == item) return true;
-	        }
-	        return false;
-}
+
+				// if문을 이용한 풀이
+//				for(int col = 1 ; col <= input * 2 - 1; col++) {
+//
+//					if( input-row>=col || input+row<=col) {
+//						System.out.print(" ");
+//
+//					}else{
+//						System.out.print("*");
+//					}
+//				}
+
+				System.out.println(); // 줄바꿈
+			}
+
+		}
 }
